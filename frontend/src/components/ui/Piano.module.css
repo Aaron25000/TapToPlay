@@ -1,0 +1,66 @@
+.pianoContainer {
+  display: inline-flex;
+  justify-content: center;
+  padding: 20px 10px 10px 10px;
+  background-color: #222;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  border-bottom: 4px solid #000;
+}
+
+.piano {
+  display: flex;
+  height: 250px;
+}
+
+.keyWrapper {
+  position: relative;
+  display: flex;
+}
+
+.whiteKey {
+  width: 60px;
+  height: 100%;
+  background: white;
+  border: 1 solid #ccc;
+  border-radius: 0 0 5px 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.whiteKey:active {
+  background: #c0c0c0;
+}
+
+.blackKey {
+  position: absolute;
+  width: 34px;
+  height: 150px;
+  background: #000;
+  z-index: 2;
+  left: 43px;
+  border-radius: 0 0 3px 3px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.blackKey:active {
+  background: #333;
+}
+
+.highlight {
+  background-color: #ffcc00 !important;
+  box-shadow: 0 0 15px #ffcc00;
+  border-color: #ffaa00;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
