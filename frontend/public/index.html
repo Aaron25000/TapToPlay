@@ -1,331 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TapToPlay</title>
-    <style>
-        /* RESET STYLES - Remove default browser margins/padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #F8FAFC;
-        }
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
-        /* SEARCH SECTION - Contains all top elements (logo, user, settings, search) */
-        .search-section {
-            padding: 1rem 5%;
-            background: linear-gradient(135deg, #2063d7 0%, #1DBFAF 100%);
-        }
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
 
-        /* TOP BAR - Holds logo on left, user section on right */
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        /* LOGO IMAGE - Company logo styling */
-        .logo-image {
-            height: 128px;           /* Logo height */
-            width: auto;             /* Width auto to maintain aspect ratio */
-            cursor: pointer;         /* Shows hand cursor on hover */
-            object-fit: contain;     /* Prevents image distortion */
-            background: white;       /* White background behind logo */
-            border-radius: 8px;      /* Rounded corners */
-            padding: 4px;            /* Space between logo and border */
-        }
-
-        /* USER SECTION - Contains user avatar and settings icon */
-        .user-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;               /* Space between user image and settings */
-        }
-
-        /* USER IMAGE - Circular avatar for user profile */
-        .user-image {
-            width: 40px;
-            height: 40px;
-            background: white;
-            border-radius: 50%;      /* Makes it circular */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #2063d7;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        /* SETTINGS ICON - Gear icon for app settings */
-        .setting-icon {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: white;
-            transition: color 0.2s;
-            background: rgba(255,255,255,0.2);  /* Semi-transparent background */
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .setting-icon:hover {
-            background: rgba(255,255,255,0.3);  /* Darker on hover */
-        }
-
-        /* SEARCH CONTAINER - Wrapper for search input and icons */
-        .search-container {
-            display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 50px;      /* Pill shape */
-            padding: 0.5rem 1rem;
-            width: 100%;
-            max-width: 600px;          /* Maximum width on large screens */
-            margin: 0 auto;            /* Centers the search bar */
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-
-        /* SEARCH ICON - Magnifying glass */
-        .search-icon {
-            color: #999;
-            margin-right: 0.5rem;
-        }
-
-        /* SEARCH INPUT - Text input field */
-        .search-input {
-            flex: 1;                   /* Takes remaining space */
-            padding: 0.8rem 0;
-            border: none;
-            outline: none;             /* Removes default focus outline */
-            font-size: 1rem;
-        }
-
-        /* MICROPHONE ICON - Voice search button */
-        .mic-icon {
-            color: #0A1F44;
-            cursor: pointer;
-            padding: 0.5rem;
-            font-size: 1.2rem;
-            transition: color 0.2s;
-        }
-
-        .mic-icon:hover {
-            color: #1DBFAF;            /* Changes color on hover */
-        }
-
-        /* MUSIC SECTION - Main content area for song cards */
-        .music-section {
-            padding: 2rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* SECTION TITLE - "Music Selection" heading */
-        .section-title {
-            color: #0A1F44;
-            margin-bottom: 1.5rem;
-        }
-
-        /* MUSIC GRID - Responsive grid for song cards */
-        .music-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;               /* Space between cards */
-        }
-
-        /* MUSIC CARD - Individual song card */
-        .music-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;            /* Keeps content within rounded corners */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s;  /* Smooth animation on hover */
-            cursor: pointer;
-        }
-
-        .music-card:hover {
-            transform: translateY(-4px);  /* Lifts card up on hover */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* CARD IMAGE - Colored background with emoji */
-        .card-image {
-            height: 140px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-
-        /* CARD CONTENT - Text area of the card */
-        .card-content {
-            padding: 1rem;
-        }
-
-        .card-content h4 {
-            margin-bottom: 0.3rem;       /* Song title */
-        }
-
-        .artist {
-            color: #666;                  /* Artist name - gray color */
-            font-size: 0.9rem;
-        }
-
-        /* RESPONSIVE DESIGN - Adjusts for tablet and mobile */
-        @media (max-width: 768px) {
-            .music-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-            
-            .logo-image {
-                height: 32px;              /* Smaller logo on mobile */
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- ===== SEARCH SECTION ===== -->
-    <!-- Contains logo, user profile, settings, and search bar all in one gradient background -->
-    <div class="search-section">
-        
-        <!-- TOP BAR: Logo (left) + User section (right) -->
-        <div class="top-bar">
-            <!-- Company Logo - Image file should be in same folder -->
-            <img src="TapToPlay_team_logo_design.png" alt="TapToPlay Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            
-            <!-- User Section - Avatar and Settings -->
-            <div class="user-section">
-                <!-- User Avatar - Shows user initials (JD) -->
-                <div class="user-image">👤</div>
-                <!-- Settings Gear Icon -->
-                <span class="setting-icon">⚙️</span>
-            </div>
-        </div>
-
-        <!-- SEARCH BAR: With search icon, input field, and microphone -->
-        <div class="search-container">
-            <!-- Search Icon (Magnifying Glass) -->
-            <span class="search-icon">🔍</span>
-            <!-- Text Input for typing search queries -->
-            <input 
-                type="text"
-                placeholder="Search songs..."
-                class="search-input"
-            />
-            <!-- Microphone Icon for voice search -->
-            <span class="mic-icon">🎤</span>
-        </div>
-    </div>
-
-    <!-- ===== MUSIC SECTION ===== -->
-    <!-- Main content area displaying song library -->
-    <div class="music-section">
-        <!-- Section Header -->
-        <h2 class="section-title">🎵 Music Selection</h2>
-        
-        <!-- Grid of song cards - Each card is a clickable song -->
-        <div class="music-grid">
-            
-            <!-- Song Card 1: Free Loop -->
-            <div class="music-card">
-                <div class="card-image">🎵</div>
-                <div class="card-content">
-                    <h4>Free Loop</h4>
-                    <p class="artist">Daniel Powter</p>
-                </div>
-            </div>
-
-            <!-- Song Card 2: Yellow-->
-            <div class="music-card">
-                <div class="card-image">🎹</div>
-                <div class="card-content">
-                    <h4>Yellow</h4>
-                    <p class="artist">Coldplay</p>
-                </div>
-            </div>
-
-            <!-- Song Card 3: Somthing just like this -->
-            <div class="music-card">
-                <div class="card-image">🎼</div>
-                <div class="card-content">
-                    <h4>Something Just Like This</h4>
-                    <p class="artist">The Chainsmokers</p>
-                </div>
-            </div>
-
-            <!-- Song Card 4: Waiting for love -->
-            <div class="music-card">
-                <div class="card-image">🌙</div>
-                <div class="card-content">
-                    <h4>Waiting for Love</h4>
-                    <p class="artist">Avicii</p>
-                </div>
-            </div>
-
-            <!-- Song Card 5: Perfect -->
-            <div class="music-card">
-                <div class="card-image">🌊</div>
-                <div class="card-content">
-                    <h4>Perfect</h4>
-                    <p class="artist">Ed Sheeran</p>
-                </div>
-            </div>
-
-            <!-- Song Card 6: Bohemian Rhapsody -->
-            <div class="music-card">
-                <div class="card-image">☀️</div>
-                <div class="card-content">
-                    <h4>Bohemian Rhapsody</h4>
-                    <p class="artist">Queen</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== JAVASCRIPT INTERACTIONS ===== -->
-    <script>
-        // SEARCH FUNCTIONALITY - Triggered when user presses Enter
-        document.querySelector('.search-input').addEventListener('keypress', function(e) {
-            if(e.key === 'Enter') {
-                alert('Searching for: ' + this.value);  // Demo: shows search query
-            }
-        });
-
-        // MICROPHONE BUTTON - Voice search activation (demo)
-        document.querySelector('.mic-icon').addEventListener('click', function() {
-            alert('🎤 Voice search activated');  // Demo: shows voice search message
-        });
-
-        // MUSIC CARD CLICK - Each song card is clickable
-        document.querySelectorAll('.music-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const title = this.querySelector('h4').textContent;  // Gets song title
-                alert('Opening: ' + title);  // Demo: shows which song was clicked
-            });
-        });
-
-        // USER AVATAR CLICK - Opens user profile (demo)
-        document.querySelector('.user-image').addEventListener('click', function() {
-            alert('User profile');  // Demo: shows profile message
-        });
-
-        // SETTINGS ICON CLICK - Opens settings page (demo)
-        document.querySelector('.setting-icon').addEventListener('click', function() {
-            alert('Settings');  // Demo: shows settings message
-        });
-    </script>
-</body>
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
 </html>

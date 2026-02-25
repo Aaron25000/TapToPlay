@@ -1,0 +1,31 @@
+.topbar {
+  display: flex;
+  align-self: center;
+  background: #0087fd;
+  width: 100%;
+  height: 80px;
+  box-shadow: 0 0 2px;
+  position: relative;
+}
+
+.logo {
+  width: auto;
+  height: 80px;
+  z-index: 2;
+}
+
+.settingIcon {
+  margin: 20px;
+}
+
+.sideSection {
+  display: flex;
+  align-items: center;
+}
+
+.middleSection {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}

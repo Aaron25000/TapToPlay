@@ -1,10 +1,10 @@
 import './App.css';
-import { Piano } from './components/ui/Piano';
+import PianoView from './views/PianoView';
 
 function App() {
   return (
     <>
-      <Piano />
+      <PianoView />
     </>
   );
 }

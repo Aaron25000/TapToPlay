@@ -1,0 +1,10 @@
+.pill {
+  background: white;
+  font-size: 16pt;
+  font-weight: bold;
+  color: #808080;
+  padding: 10px 20px;
+  border-radius: 40px;
+  width: 200px;
+  text-align: center;
+}
