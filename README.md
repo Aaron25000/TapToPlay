@@ -1,5 +1,6 @@
 # TapToPlay
 Team Billy Joel
+<img width="1013" height="718" alt="image" src="https://github.com/user-attachments/assets/c3771f82-0296-4dc9-bcc9-b373f7cd154c" />
 
 ## 1. Getting Started
 ### 1.1 Requirements
