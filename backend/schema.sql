@@ -1,0 +1,11 @@
+CREATE TABLE songs (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(20) NOT NULL,
+  artist VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE song_notes (
+  id SERIAL PRIMARY KEY,
+  song_id INTEGER REFERENCES songs(id) ON DELETE CASCADE,
+  note_content TEXT NOT NULL
+);
