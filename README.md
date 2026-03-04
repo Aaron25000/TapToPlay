@@ -18,10 +18,8 @@ This should open up a web browser page, if not you can visit http://localhost:30
 
 ### 1.4. Backend Setup
 1. Move to the **backend** directory.
-2. Create a virual enviorment: `python3 -m venv venv`.
-3. Activate the virtual enviorment: `source venv/bin/activate` on Mac/Linux.
-4. Install dependacies: `pip install -r requirements.txt`.
-5. Fianlly run the server: `python server.py`.
+2. Install dependacies: `pip install -r requirements.txt`.
+3. Fianlly run the server: `python3 app.py`.
 
 
 ## 2. Contributing
