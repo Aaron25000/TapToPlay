@@ -1,9 +1,7 @@
 # TapToPlay
 Team Billy Joel
-<img width="1013" height="718" alt="image" src="https://github.com/user-attachments/assets/c3771f82-0296-4dc9-bcc9-b373f7cd154c" />
 
 ## 1. Getting Started
-
 ### 1.1 Requirements
 * Latest version of Node.js.
 * Python3 installed.
@@ -18,11 +16,11 @@ Clone the repo using `git clone https://github.com/Aaron25000/TapToPlay.git`
 This should open up a web browser page, if not you can visit http://localhost:3000.
 
 ### 1.4. Backend Setup
-1. Move to the **backend** directory.activate` on Mac/Linux.
+1. Move to the **backend** directory.
 2. Install dependacies: `pip install -r requirements.txt`.
 3. Fianlly run the server:  
-*Windows:* `python app.py`.  
-*Mac/Linux* `python3 app.py` 
+*Mac/Linux* `python3 app.py`.  
+*Windows*`python app.py`.
 
 
 ## 2. Contributing
@@ -42,4 +40,4 @@ This should open up a web browser page, if not you can visit http://localhost:30
 1. After pushing your code to your branch, go to: https://github.com/Aaron25000/TapToPlay.
 2. You should see **"Compare & Pull Request"** button, click it!
 3. Then click **"Create Pull Request"**, don't worry about writting a description.
-The Team Coordinator will review your code for merge errors.
+4. The Team Coordinator will review your code for merge errors.

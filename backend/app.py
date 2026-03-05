@@ -1,8 +1,15 @@
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
+from routes.song_routes import song_bp
 
 app = Flask(__name__)
 CORS(app)
+
+load_dotenv()
+
+app.register_blueprint(song_bp, url_prefix='/api/songs')
 
 SONG_DATABASE = {
   "is-this-love": ["C#", "F#", "G#", "A"],
@@ -22,4 +29,4 @@ def get_notes(song_name):
     return jsonify({ "error": "Song not found" }), 404
 
 if __name__ == '__main__':
-  app.run(debug=True, port=8080)
+  app.run(debug=True, port=os.getenv('PORT'))
