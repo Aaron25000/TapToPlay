@@ -1,0 +1,36 @@
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Light off-white for subtle contrast */
+}
+
+.topbarTitle {
+  color: white; /* Keeps text readable against your blue Topbar */
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.viewContainer {
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .viewContainer {
+    padding: 1rem;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+}
