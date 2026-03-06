@@ -3,7 +3,7 @@ import Topbar from "../components/ui/Topbar";
 import TextPill from "../components/ui/TextPill";
 import styles from './InstrumentSelectionView.module.css';
 
-const InstrumentSelectionView = ({ song, onBack }) => {
+const InstrumentSelectionView = ({ song, onBack, onSelectInstrument }) => {
   const displayTitle = song ? song.title : "Song";
 
   return (
@@ -22,7 +22,10 @@ const InstrumentSelectionView = ({ song, onBack }) => {
 
         <div className={styles.instrumentContainer}>
           {/* Piano - Using string paths instead of imports */}
-          <button className={styles.instrumentButtonGroup}>
+          <button
+            className={styles.instrumentButtonGroup}
+            onClick={() => onSelectInstrument('piano')}
+          >
             <div className={styles.iconCircle}>
               <img src="/assets/Piano Instrument.png" className={styles.instrumentIcon} alt="Piano" />
             </div>
