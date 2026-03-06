@@ -1,10 +1,11 @@
 import './App.css';
-import PianoView from './views/PianoView';
+import SongSelectionView from './views/SongSelectionView';
+//import PianoView from './views/PianoView';
 
 function App() {
   return (
     <>
-      <PianoView />
+      <SongSelectionView />
     </>
   );
 }

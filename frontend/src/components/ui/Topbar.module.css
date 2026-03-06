@@ -1,31 +1,49 @@
 .topbar {
   display: flex;
-  align-self: center;
+  align-items: center; /* Better than self-center */
+  justify-content: space-between;
   background: #0087fd;
   width: 100%;
-  height: 80px;
-  box-shadow: 0 0 2px;
-  position: relative;
-}
-
-.logo {
-  width: auto;
-  height: 80px;
-  z-index: 2;
-}
-
-.settingIcon {
-  margin: 20px;
+  height: 70px; /* Slimmed down slightly for better iPad aspect ratio */
+  padding: 0 1rem; /* Prevents icons from touching the screen edge */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky; /* Keeps it at the top while scrolling */
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
 }
 
 .sideSection {
   display: flex;
   align-items: center;
+  min-width: 80px; /* Ensures middle section stays centered even if logo is small */
+}
+
+.logo {
+  height: 50px; /* Scaled down so it doesn't feel cramped */
+  width: auto;
+  object-fit: contain;
 }
 
 .middleSection {
-  display: flex;
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* If children are long (like a search bar), this prevents it from 
+     pushing the logo off-screen */
+  padding: 0 10px; 
+}
+
+.settingIcon {
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px; /* Increases the "touchable" area for iPad users */
+  transition: opacity 0.2s;
+}
+
+.settingIcon:active {
+  opacity: 0.6; /* Visual feedback for touch */
 }

@@ -1,41 +1,48 @@
+import React from 'react';
 import Topbar from "../components/ui/Topbar";
 import TextPill from "../components/ui/TextPill";
-import pianoImg from '../assets/Piano Instrument.png';
-import drumsImg from '../assets/Drums Instrument.png';
-import guitarImg from '../assets/Guitar Instrument.png';
-import pianoButton from '../assets/PianoButton.png';
-import drumsButton from '../assets/DrumsButton.png';
-import guitarButton from '../assets/GuitarButton.png';
-
 import styles from './InstrumentSelectionView.module.css';
 
-const InstrumentSelectionView = () => {
+const InstrumentSelectionView = ({ song, onBack }) => {
+  const displayTitle = song ? song.title : "Song";
+
   return (
     <div className={styles.appContainer}>
       <Topbar>
-        <TextPill text={'Select Mode'} />
+        <div className={styles.topbarContent}>
+          <button className={styles.backButton} onClick={onBack}>
+            <span>← Back</span>
+          </button>
+          <TextPill text={`Playing: ${displayTitle}`} />
+        </div>
       </Topbar>
 
       <main className={styles.instrumentSelectionPage}>
         <h1 className={styles.title}>Choose an Instrument</h1>
 
         <div className={styles.instrumentContainer}>
-          {/* Piano */}
-          <button className={styles.instrumentButtonGroup} onClick={() => console.log("Piano clicked")}>
-            <img src={pianoImg} className={styles.instrumentIcon} alt="Piano Icon" />
-            <img src={pianoButton} className={styles.labelImage} alt="Piano Text" />
+          {/* Piano - Using string paths instead of imports */}
+          <button className={styles.instrumentButtonGroup}>
+            <div className={styles.iconCircle}>
+              <img src="/assets/Piano Instrument.png" className={styles.instrumentIcon} alt="Piano" />
+            </div>
+            <img src="/assets/PianoButton.png" className={styles.labelImage} alt="Piano Text" />
           </button>
 
           {/* Drums */}
-          <button className={styles.instrumentButtonGroup} onClick={() => console.log("Drums clicked")}>
-            <img src={drumsImg} className={styles.instrumentIcon} alt="Drums Icon" />
-            <img src={drumsButton} className={styles.labelImage} alt="Drums Text" />
+          <button className={styles.instrumentButtonGroup}>
+            <div className={styles.iconCircle}>
+              <img src="/assets/Drums Instrument.png" className={styles.instrumentIcon} alt="Drums" />
+            </div>
+            <img src="/assets/DrumsButton.png" className={styles.labelImage} alt="Drums Text" />
           </button>
 
           {/* Guitar */}
-          <button className={styles.instrumentButtonGroup} onClick={() => console.log("Guitar clicked")}>
-            <img src={guitarImg} className={styles.instrumentIcon} alt="Guitar Icon" />
-            <img src={guitarButton} className={styles.labelImage} alt="Guitar Text" />
+          <button className={styles.instrumentButtonGroup}>
+            <div className={styles.iconCircle}>
+              <img src="/assets/Guitar Instrument.png" className={styles.instrumentIcon} alt="Guitar" />
+            </div>
+            <img src="/assets/GuitarButton.png" className={styles.labelImage} alt="Guitar Text" />
           </button>
         </div>
       </main>
