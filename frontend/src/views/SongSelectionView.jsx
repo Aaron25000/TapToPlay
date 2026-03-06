@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Topbar from "../components/ui/Topbar";
 import MusicCard from "../components/ui/MusicCard";
-import InstrumentSelectionView from "./InstrumentSelectionView"; // Import your view
+import InstrumentSelectionView from "./InstrumentSelectionView";
+import PianoView from "./PianoView"
 import styles from './SongSelectionView.module.css';
 
 const SongSelectionView = () => {
   const [selectedSong, setSelectedSong] = useState(null);
+  const [instrument, setInstrument] = useState(null);
 
   const songs = [
     { id: 1, title: 'Abba', artist: 'ABBA', image: '/assets/image/Abba.webp' },
@@ -20,12 +22,21 @@ const SongSelectionView = () => {
     { id: 10, title: 'John Williams', artist: 'John Williams', image: '/assets/image/john-williams.jpeg' }
   ];
 
-  // If a song is selected, show the Instrument view instead
+  if (selectedSong && instrument === 'piano') {
+    return (
+      <PianoView 
+        song={selectedSong} 
+        onBack={() => setInstrument(null)} 
+      />
+    );
+  }
+  
   if (selectedSong) {
     return (
       <InstrumentSelectionView 
         song={selectedSong} 
-        onBack={() => setSelectedSong(null)} 
+        onBack={() => setSelectedSong(null)}
+        onSelectInstrument={(type) => setInstrument(type)}
       />
     );
   }
