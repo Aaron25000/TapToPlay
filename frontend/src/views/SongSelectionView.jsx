@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
 import Topbar from "../components/ui/Topbar";
 import MusicCard from "../components/ui/MusicCard";
-import InstrumentSelectionView from "./InstrumentSelectionView";
-import PianoView from "./PianoView"
 import styles from './SongSelectionView.module.css';
 
-const SongSelectionView = () => {
-  const [selectedSong, setSelectedSong] = useState(null);
-  const [instrument, setInstrument] = useState(null);
-
+const SongSelectionView = ({ onSelectSong }) => {
   const songs = [
     { id: 1, title: 'Abba', artist: 'ABBA', image: '/assets/image/Abba.webp' },
     { id: 2, title: 'Shawn Mendes', artist: 'Shawn Mendes', image: '/assets/image/Shawn-Mendes.jpg' },
@@ -21,25 +15,6 @@ const SongSelectionView = () => {
     { id: 9, title: 'Avicii', artist: 'Avicii', image: '/assets/image/Avicii.webp' },
     { id: 10, title: 'John Williams', artist: 'John Williams', image: '/assets/image/john-williams.jpeg' }
   ];
-
-  if (selectedSong && instrument === 'piano') {
-    return (
-      <PianoView 
-        song={selectedSong} 
-        onBack={() => setInstrument(null)} 
-      />
-    );
-  }
-  
-  if (selectedSong) {
-    return (
-      <InstrumentSelectionView 
-        song={selectedSong} 
-        onBack={() => setSelectedSong(null)}
-        onSelectInstrument={(type) => setInstrument(type)}
-      />
-    );
-  }
 
   return (
     <div className={styles.mainWrapper}>
@@ -54,7 +29,7 @@ const SongSelectionView = () => {
               key={song.id}
               song={song}
               // Clicking the card sets the state and triggers the view change
-              onClick={() => setSelectedSong(song)}
+              onClick={() => onSelectSong(song)}
             />
           ))}
         </div>

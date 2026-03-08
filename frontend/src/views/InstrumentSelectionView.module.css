@@ -2,133 +2,59 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #ffffff;
+  width: 100%;
+  background-color: white;
 }
 
-.topbarContent {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.backButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1.5px solid white;
-  color: white;
-  padding: 6px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.backButton:hover {
-  background: white;
-  color: #0087fd;
-}
-
-.instrumentSelectionPage {
+.viewContainer {
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* Changed from flex-start to center for better balance */
   align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding-bottom: 10vh; /* Nudge up slightly from absolute center */
+  color: black;
   width: 100%;
 }
 
 .title {
-  font-size: 2.5rem;
-  color: #1a1a1a;
-  margin: 0;
-  font-weight: 800;
-  /* Increase this value to push the images further down */
-  margin-bottom: 5rem; 
-}
-
-/* Alternatively, if you are using the headerSection wrapper */
-.headerSection {
+  font-size: 40px;
+  font-weight: 750;
+  margin-bottom: 60px; /* Increased margin for better spacing */
   text-align: center;
-  margin-bottom: 6rem; /* Adjust this for more/less gap */
-}
-
-.subtitle {
-  color: #666;
-  font-size: 1.1rem;
-  margin-top: 0.5rem;
 }
 
 .instrumentContainer {
   display: flex;
+  flex-direction: row;
+  gap: 80px; /* Slightly tighter gap for iPad compatibility */
   justify-content: center;
-  align-items: flex-end; /* Aligns instruments along a baseline */
-  gap: 4rem;
+  align-items: center;
   width: 100%;
-  flex-wrap: wrap; /* Supports iPad Portrait */
 }
 
 .instrumentButtonGroup {
   background: none;
   border: none;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  width: 220px;
+  gap: 35px; 
+  transition: transform 0.2s ease, filter 0.2s ease; 
 }
 
 .instrumentButtonGroup:hover {
-  transform: scale(1.1);
-}
-
-.iconCircle {
-  width: 180px;
-  height: 180px;
-  background: #f8f9fa;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  border: 2px solid #eee;
-  transition: border-color 0.3s ease;
-}
-
-.instrumentButtonGroup:hover .iconCircle {
-  border-color: #0087fd;
-  background: #f0f7ff;
+  transform: scale(1.08);
+  filter: brightness(1.1);
 }
 
 .instrumentIcon {
-  width: 120px;
+  width: clamp(150px, 15vw, 220px); /* Scales based on screen width */
   height: auto;
-  object-fit: contain;
 }
 
 .labelImage {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* iPad Adjustments */
-@media (max-width: 1024px) {
-  .instrumentContainer {
-    gap: 2rem;
-  }
-  
-  .iconCircle {
-    width: 150px;
-    height: 150px;
-  }
-  
-  .instrumentIcon {
-    width: 100px;
-  }
+  width: clamp(100px, 10vw, 150px); 
+  height: auto;
 }

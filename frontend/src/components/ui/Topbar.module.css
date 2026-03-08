@@ -1,49 +1,82 @@
 .topbar {
   display: flex;
-  align-items: center; /* Better than self-center */
-  justify-content: space-between;
-  background: #0087fd;
+  align-items: center;
+  /* This ensures the three main blocks distribute correctly */
+  justify-content: space-between; 
+  background: linear-gradient(90deg, #0076de 0%, #0087fd 100%);
   width: 100%;
-  height: 70px; /* Slimmed down slightly for better iPad aspect ratio */
-  padding: 0 1rem; /* Prevents icons from touching the screen edge */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: sticky; /* Keeps it at the top while scrolling */
+  height: 64px;
+  padding: 0 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   box-sizing: border-box;
 }
 
-.sideSection {
+/* By giving both sides flex: 1, they expand equally.
+   This mathematically forces the middle section to the screen center.
+*/
+.leftSection, .rightSection {
+  flex: 1; 
   display: flex;
   align-items: center;
-  min-width: 80px; /* Ensures middle section stays centered even if logo is small */
+  height: 100%;
+}
+
+/* Right section needs to align its content to the end */
+.rightSection {
+  justify-content: flex-end;
+}
+
+.leftSection {
+  gap: 12px;
+}
+
+.middleSection {
+  /* It only takes up the space it needs, and the side flexes push it to center */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap; 
+}
+
+/* Ensure the logo behaves inside the new flex logic */
+.logoContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  box-sizing: border-box;
 }
 
 .logo {
-  height: 50px; /* Scaled down so it doesn't feel cramped */
+  height: 100%;
   width: auto;
   object-fit: contain;
 }
 
-.middleSection {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* If children are long (like a search bar), this prevents it from 
-     pushing the logo off-screen */
-  padding: 0 10px; 
-}
-
-.settingIcon {
+.iconButton {
+  background: transparent;
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px; /* Increases the "touchable" area for iPad users */
-  transition: opacity 0.2s;
+  padding: 0;           /* Clean up padding to let width/height do the work */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease; /* Transition specifically for the hover */
 }
 
-.settingIcon:active {
-  opacity: 0.6; /* Visual feedback for touch */
+/* THIS is what you want: the highlight happens on HOVER */
+.iconButton:hover {
+  background-color: rgba(255, 255, 255, 0.25) !important; /* Forces the light circle on hover */
+}
+
+/* Different effect for 'active' (the actual click) so they don't look the same */
+.iconButton:active {
+  background-color: rgba(0, 0, 0, 0.1); 
+  transform: scale(0.92);
 }
