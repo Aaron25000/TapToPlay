@@ -5,14 +5,12 @@ import Topbar from "../components/ui/Topbar";
 import ProgressBar from "../components/ui/ProgressBar";
 import { getSongNotes } from "../services/musicService";
 import styles from './PianoView.module.css';
+import StarRating from "../components/ui/StarRating";
 
 const PianoView = ({ song, onHome }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [songNotes, setSongNotes] = useState([]);
   const [attemptHistory, setAttemptHistory] = useState([]);
-
-
-  console.log(songNotes)
 
   useEffect(() => {
     getSongNotes('seven-nation-army')
@@ -42,25 +40,35 @@ const PianoView = ({ song, onHome }) => {
     status: status
   }));
 
+  const isFinished = songNotes.length > 0 && currentIndex >= songNotes.length;
+  const correctNotes = attemptHistory.filter(status => status === 'green').length;
+
   return (
-  <div className={styles.viewContainer}>
-    <Topbar onHome={onHome}>
-      <TextPill text={song?.title || 'Song'} />
-    </Topbar>
+    <div className={styles.viewContainer}>
+      <Topbar onHome={onHome}>
+        <TextPill text={song?.title || 'Song'} />
+      </Topbar>
 
-    <div className={styles.progressWrapper}>
-      <ProgressBar segments={progressSegments} />
-    </div>
+      <div className={styles.progressWrapper}>
+        <ProgressBar segments={progressSegments} />
+      </div>
 
-    {/* This container now handles the centering logic */}
-    <div className={styles.pianoContainer}>
-      <Piano 
-        expectedNote={songNotes[currentIndex]} 
-        onNotePlayed={handleNoteResult} 
-      />
+      {/* This container now handles the centering logic */}
+      <div className={styles.pianoContainer}>
+        <Piano 
+          expectedNote={songNotes[currentIndex]} 
+          onNotePlayed={handleNoteResult} 
+        />
+      </div>
+      {isFinished &&
+        <StarRating
+          value={correctNotes}
+          max={songNotes.length}
+          onClose={onHome}
+        />
+      }
     </div>
-  </div>
-);
+  );
 };
 
 export default PianoView;

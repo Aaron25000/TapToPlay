@@ -1,5 +1,6 @@
 # TapToPlay
 Team Billy Joel
+![alt text](frontend/public/assets/TapToPlay_team_logo_design.png)
 
 ## 1. Getting Started
 ### 1.1 Requirements
@@ -12,7 +13,7 @@ Clone the repo using `git clone https://github.com/Aaron25000/TapToPlay.git`
 ### 1.3 Frontend Setup
 1. Move to the **frontend** directory by using `cd frontend` on Mac/Linux.
 2. Install packages using `npm install`.
-3. Run the app using `npm start`.
+3. Run the app using `npm run dev`.
 This should open up a web browser page, if not you can visit http://localhost:3000.
 
 ### 1.4. Backend Setup
