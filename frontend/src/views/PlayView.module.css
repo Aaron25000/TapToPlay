@@ -1,0 +1,25 @@
+.viewContainer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
+
+.progressWrapper {
+  width: 60%;         /* Reduced from 80% to make it more compact */
+  max-width: 600px;   /* Prevents it from getting too long on wide screens */
+  margin: 60px auto;  /* Increased top margin to center it vertically between Topbar and Piano */
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.pianoContainer {
+  flex: 1; /* Takes up all space between Topbar/Progress and the bottom */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  width: 100%;
+}
