@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SearchSection from '../components/ui/SearchSection';
 import MusicSection from '../components/ui/MusicSection';
 
-const Homepage = ({ user, isLoggedIn, onLoginClick, onLogout, onSearch, searchQuery, onSongClick }) => {
+const Homepage = ({ user, isLoggedIn, onLoginClick, onLogout, onSearch, searchQuery, onSongClick, onUserProfile }) => {
   const [songs] = useState([
     { id: 1, title: 'Abba', artist: 'ABBA', image: '/assets/image/Abba.webp' },
     { id: 2, title: 'Shawn Mendes', artist: 'Shawn Mendes', image: '/assets/image/Shawn-Mendes.jpg' },

@@ -2,18 +2,18 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f8f9fa; /* Light off-white for subtle contrast */
+  background-color: #f8f9fa;
 }
 
 .topbarTitle {
-  color: white; /* Keeps text readable against your blue Topbar */
+  color: white;
   font-weight: 700;
   font-size: 1.2rem;
 }
 
 .viewContainer {
   padding: 2rem;
-  max-width: 1600px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
@@ -21,16 +21,33 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
   gap: 2rem;
+  width: 100%;
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .viewContainer {
     padding: 1rem;
   }
+
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }

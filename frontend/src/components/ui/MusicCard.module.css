@@ -1,75 +1,94 @@
 .card {
-  background: #ffffff;
-  padding: 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  display: flex;
-  flex-direction: column;
-  /* Subtle border and shadow to define the card against the white bg */
-  border: 1px solid #eaeaea;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+  width: 250px; /* Increased width */
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
-  border-color: #0087fd; /* Highlight border on hover using your brand blue */
+  transform: translateY(-4px);
 }
 
 .imageWrapper {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 12px;
-  background-color: #f0f0f0; /* Fallback for loading images */
 }
 
 .image {
   width: 100%;
-  height: 100%;
+  height: 160px;
   object-fit: cover;
 }
 
-.title {
-  color: #1a1a1a; /* Dark text for light mode */
-  margin: 0 0 4px 0;
-  font-size: 1rem;
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
   font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 14px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 18px;
+  margin: 0;
 }
 
 .artist {
-  color: #666666; /* Grey text for artist */
-  margin: 0;
-  font-size: 0.85rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #777;
+  margin-top: 4px;
 }
 
-/* Optional: Make the play button visible on light mode */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
 .playButton {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background: #0087fd;
-  color: white;
+  background: #2063d7;
   border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity 0.2s;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  transition: all 0.2s; 
+  align-self: flex-end;
 }
 
-.card:hover .playButton {
-  opacity: 1;
+.playButton:hover {
+  background: #1DBFAF;
+  transform: scale(1.1);
+  align-self:flex-end;
+}
+
+.difficulty {
+  white-space: nowrap;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
 }
