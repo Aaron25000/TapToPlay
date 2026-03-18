@@ -1,24 +1,36 @@
+import { useState } from "react";
 import Topbar from "../components/ui/Topbar";
 import MusicCard from "../components/ui/MusicCard";
+import UserProfile from "../components/ui/UserProfile";
 import styles from './SongSelectionView.module.css';
 
 const SongSelectionView = ({ onSelectSong }) => {
+  const [showProfile, setShowProfile] = useState(false);
+
+  const user = {
+    username: 'MusicLover',
+    email: 'musiclover@example.com'
+  };
+
+  const openProfile = () => setShowProfile(true);
+  const closeProfile = () => setShowProfile(false);
+
   const songs = [
-    { id: 1, title: 'Abba', artist: 'ABBA', image: '/assets/image/Abba.webp' },
-    { id: 2, title: 'Shawn Mendes', artist: 'Shawn Mendes', image: '/assets/image/Shawn-Mendes.jpg' },
-    { id: 3, title: 'Beatles', artist: 'The Beatles', image: '/assets/image/beatles.jpg' },
-    { id: 4, title: 'Queen', artist: 'Queen', image: '/assets/image/Queen.jpg' },
-    { id: 5, title: 'Ed Sheeran', artist: 'Ed Sheeran', image: '/assets/image/Ed_Sheeran.webp' },
-    { id: 6, title: 'The Chainsmokers', artist: 'The Chainsmokers', image: '/assets/image/The-Chainsmokers.webp' },
-    { id: 7, title: 'Daniel Powter', artist: 'Daniel Powter', image: '/assets/image/david-powter-bad-day.webp' },
-    { id: 8, title: 'Coldplay', artist: 'Coldplay', image: '/assets/image/coldplay-band-facts.jpg' },
-    { id: 9, title: 'Avicii', artist: 'Avicii', image: '/assets/image/Avicii.webp' },
-    { id: 10, title: 'John Williams', artist: 'John Williams', image: '/assets/image/john-williams.jpeg' }
+    { id: 1, title: 'Dancing Queen', artist: 'Abba', image: '/assets/image/Abba.webp', difficulty: 'easy' },
+    { id: 2, title: 'Treat You Better', artist: 'Shawn Mendes', image: '/assets/image/Shawn-Mendes.jpg', difficulty: 'medium' },
+    { id: 3, title: 'Hey Jude', artist: 'The Beatles', image: '/assets/image/beatles.jpg', difficulty: 'hard' },
+    { id: 4, title: 'Bohemian Rhapsody', artist: 'Queen', image: '/assets/image/Queen.jpg', difficulty: 'medium' },
+    { id: 5, title: 'Perfect', artist: 'Ed Sheeran', image: '/assets/image/Ed_Sheeran.webp', difficulty: 'easy' },
+    { id: 6, title: 'Closer', artist: 'The Chainsmokers', image: '/assets/image/The-Chainsmokers.webp', difficulty: 'medium' },
+    { id: 7, title: 'Bad Day', artist: 'Daniel Powter', image: '/assets/image/david-powter-bad-day.webp', difficulty: 'easy' },
+    { id: 8, title: 'Cold', artist: 'Coldplay', image: '/assets/image/coldplay-band-facts.jpg', difficulty: 'medium' },
+    { id: 9, title: 'Levels', artist: 'Avicii', image: '/assets/image/Avicii.webp', difficulty: 'hard' },
+    { id: 10, title: 'Theme from Jurassic Park', artist: 'John Williams', image: '/assets/image/john-williams.jpeg', difficulty: 'easy' }
   ];
 
   return (
     <div className={styles.mainWrapper}>
-      <Topbar>
+      <Topbar onUserProfile={openProfile}>
         <span className={styles.topbarTitle}>Song Selection</span>
       </Topbar>
 
@@ -34,6 +46,10 @@ const SongSelectionView = ({ onSelectSong }) => {
           ))}
         </div>
       </main>
+
+      {showProfile && (
+        <UserProfile user={user} onClose={closeProfile} />
+      )}
     </div>
   );
 };
