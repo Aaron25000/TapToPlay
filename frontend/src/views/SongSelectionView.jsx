@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Topbar from "../components/ui/Topbar";
 import MusicCard from "../components/ui/MusicCard";
-import UserProfile from "../components/ui/UserProfile";
+import UserProfileDialog from "../components/dialog/UserProfileDialog";
 import AchievementsDialog from '../components/dialog/AchievementsDialog';
 import styles from './SongSelectionView.module.css';
 
@@ -58,7 +58,7 @@ const SongSelectionView = ({ onSelectSong }) => {
       </main>
 
       {showProfile && (
-        <UserProfile user={user} onClose={closeProfile} />
+        <UserProfileDialog user={user} onClose={closeProfile} />
       )}
       {showAchievements && (
         <AchievementsDialog onClose={() => setShowAchievements(false)} />
