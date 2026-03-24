@@ -14,7 +14,7 @@ const getDifficultyInfo = (difficulty) => {
   }
 };
 
-const MusicCard = ({ song, onClick, onPlay }) => {
+const MusicCard = ({ song, onPlay }) => {
   const difficulty = getDifficultyInfo(song.difficulty);
 
   const handlePlayClick = (e) => {
@@ -25,7 +25,7 @@ const MusicCard = ({ song, onClick, onPlay }) => {
   };
 
   return (
-    <div className={styles.card} onClick={() => onClick(song)}>
+    <div className={styles.card}>
       <div className={styles.imageWrapper}>
         <img
           src={song.image}
@@ -34,23 +34,21 @@ const MusicCard = ({ song, onClick, onPlay }) => {
           loading="lazy"
         />
       </div>
-
       <div className={styles.content}>
         <div className={styles.text}>
           <h3 className={styles.title}>{song.title}</h3>
           <p className={styles.artist}>{song.artist}</p>
         </div>
-
         <div className={styles.controls}>
-          <button className={styles.playButton} onClick={handlePlayClick}>
-            ▶
-          </button>
           <div
             className={styles.difficulty}
             style={{ backgroundColor: difficulty.color }}
           >
             {difficulty.emoji} {difficulty.text}
           </div>
+          <button className={styles.playButton} onClick={handlePlayClick}>
+            Play ▶
+          </button>
         </div>
       </div>
     </div>

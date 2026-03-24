@@ -24,6 +24,7 @@
   grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
   gap: 2rem;
   width: 100%;
+  align-items: start;
 }
 
 /* Tablet */

@@ -51,7 +51,7 @@ const SongSelectionView = ({ onSelectSong }) => {
             <MusicCard
               key={song.id}
               song={song}
-              onClick={() => handleSelectSong(song)}
+              onPlay={() => handleSelectSong(song)}
             />
           ))}
         </div>
