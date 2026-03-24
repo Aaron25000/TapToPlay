@@ -2,7 +2,8 @@
   display: flex; /* Changed from inline-flex to fill width */
   justify-content: center;
   align-items: center;
-  padding: 30px 20px; /* More padding for a premium feel */
+  padding: 15px; /* More padding for a premium feel */
+  padding-bottom: 20px;
   background-color: #1a1a1a;
   border-radius: 15px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.6);
@@ -56,7 +57,7 @@
 .blackKey {
   position: absolute;
   /* Mathematically centered between white keys */
-  width: 60%; 
+  width: 50%; 
   height: 60%;
   background: linear-gradient(to bottom, #444 0%, #000 100%);
   z-index: 2;

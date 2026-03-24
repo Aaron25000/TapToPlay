@@ -1,15 +1,16 @@
-.pageContainer {
-  background-color: #f8f9fa;
-  min-height: 100vh;
-}
-
 .achievementsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
   max-width: 1100px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 0 20px;
+}
+
+.achievementsGrid::after {
+  content: "";
+  display: block;
+  height: 60px; /* adjust space here */
 }
 
 .achievementCard {

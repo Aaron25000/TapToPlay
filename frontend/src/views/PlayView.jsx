@@ -5,13 +5,15 @@ import Topbar from "../components/ui/Topbar";
 import ProgressBar from "../components/ui/ProgressBar";
 import StarRating from "../components/ui/StarRating";
 import { getSongNotes } from "../services/musicService";
+import { Piano } from '../components/insturments/Piano';
 import styles from './PlayView.module.css';
 
-const PlayView = ({ song, InstrumentComponent }) => {
+const PlayView = () => {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [songNotes, setSongNotes] = useState([]);
   const [attemptHistory, setAttemptHistory] = useState([]);
+  const song = [];
 
   useEffect(() => {
     // Dynamically load notes based on the song passed via props
@@ -55,9 +57,9 @@ const PlayView = ({ song, InstrumentComponent }) => {
 
       <div className={styles.instrumentContainer}>
         {/* We render the passed component here */}
-        <InstrumentComponent 
-          expectedNote={songNotes[currentIndex]} 
-          onNotePlayed={handleNoteResult} 
+        <Piano
+          expectedNote={''} 
+          onNotePlayed={() => {}} 
         />
       </div>
 

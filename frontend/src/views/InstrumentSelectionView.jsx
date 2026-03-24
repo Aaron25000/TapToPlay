@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Topbar from "../components/ui/Topbar";
 import TextPill from "../components/ui/TextPill";
 import styles from './InstrumentSelectionView.module.css';
 
 const InstrumentSelectionView = ({ song, onHome, onSelectInstrument }) => {
+  const navigate = useNavigate()
   const displayTitle = song ? song.title : "Song";
 
   return (
@@ -20,7 +22,7 @@ const InstrumentSelectionView = ({ song, onHome, onSelectInstrument }) => {
           {/* Piano */}
           <button
             className={styles.instrumentButtonGroup}
-            onClick={() => onSelectInstrument('piano')}
+            onClick={() => navigate('/Play')}
           >
             <div className={styles.iconCircle}>
               <img src="/assets/Piano Instrument.png" className={styles.instrumentIcon} alt="Piano" />

@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Topbar from "../components/ui/Topbar";
 import MusicCard from "../components/ui/MusicCard";
 import UserProfile from "../components/ui/UserProfile";
+import AchievementsDialog from '../components/dialog/AchievementsDialog';
 import styles from './SongSelectionView.module.css';
 
 const SongSelectionView = ({ onSelectSong }) => {
+  const navigate = useNavigate()
   const [showProfile, setShowProfile] = useState(false);
+  const [showAchievements, setShowAchievements] = useState(false);
 
   const user = {
     username: 'MusicLover',
@@ -14,6 +18,10 @@ const SongSelectionView = ({ onSelectSong }) => {
 
   const openProfile = () => setShowProfile(true);
   const closeProfile = () => setShowProfile(false);
+
+  const handleSelectSong = (song) => {
+    navigate(`/instrument/${song.id}`);
+  };
 
   const songs = [
     { id: 1, title: 'Dancing Queen', artist: 'Abba', image: '/assets/image/Abba.webp', difficulty: 'easy' },
@@ -30,7 +38,10 @@ const SongSelectionView = ({ onSelectSong }) => {
 
   return (
     <div className={styles.mainWrapper}>
-      <Topbar onUserProfile={openProfile}>
+      <Topbar
+        onUserProfile={openProfile}
+        onAchievements={() => setShowAchievements(true)}
+      >
         <span className={styles.topbarTitle}>Song Selection</span>
       </Topbar>
 
@@ -40,8 +51,7 @@ const SongSelectionView = ({ onSelectSong }) => {
             <MusicCard
               key={song.id}
               song={song}
-              // Clicking the card sets the state and triggers the view change
-              onClick={() => onSelectSong(song)}
+              onClick={() => handleSelectSong(song)}
             />
           ))}
         </div>
@@ -49,6 +59,9 @@ const SongSelectionView = ({ onSelectSong }) => {
 
       {showProfile && (
         <UserProfile user={user} onClose={closeProfile} />
+      )}
+      {showAchievements && (
+        <AchievementsDialog onClose={() => setShowAchievements(false)} />
       )}
     </div>
   );

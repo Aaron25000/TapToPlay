@@ -1,11 +1,18 @@
+import { useNavigate } from 'react-router-dom'
 import styles from './Topbar.module.css';
 
-const Topbar = ({ children, onHome, onUserProfile }) => {
+const Topbar = ({ children, onUserProfile, onAchievements }) => {
+  const navigate = useNavigate();
+
+  const handleHome = () => {
+    navigate('/');
+  }
+
   return (
     <div className={styles.topbar}>
       <div className={styles.leftSection}>
         {/* Home Button */}
-        <button className={styles.iconButton} onClick={onHome} aria-label="Home">
+        <button className={styles.iconButton} onClick={handleHome} aria-label="Home">
           <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#FFFFFF">
             <path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/>
           </svg>
@@ -28,9 +35,10 @@ const Topbar = ({ children, onHome, onUserProfile }) => {
           </svg>
         </button>
 
-        <button className={styles.iconButton} aria-label="Settings">
+        {/* Achievements Button */}
+        <button className={styles.iconButton} onClick={onAchievements} aria-label="Settings">
           <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#FFFFFF">
-            <path d="m382-80-18.67-126.67q-17-6.33-34.83-16.66-17.83-10.34-32.17-21.67L178-192.33 79.33-365l106.34-78.67q-1.67-8.33-2-18.16-.34-9.84-.34-18.17 0-8.33.34-18.17.33-9.83 2-18.16L79.33-595 178-767.67 296.33-715q14.34-11.33 32.34-21.67 18-10.33 34.66-16L382-880h196l18.67 126.67q17 6.33 35.16 16.33 18.17 10 31.84 22L782-767.67 880.67-595l-106.34 77.33q1.67 9 2 18.84.34 9.83.34 18.83 0 9-.34 18.5Q776-452 774-443l106.33 78-98.66 172.67-118-52.67q-14.34 11.33-32 22-17.67 10.67-35 16.33L578-80H382Zm98.67-266.67q55.33 0 94.33-39T614-480q0-55.33-39-94.33t-94.33-39q-55.67 0-94.5 39-38.84 39-38.84 94.33t38.84 94.33q38.83 39 94.5 39Z"/>
+            <path d="M292-120v-66.67h154.67v-140q-52.34-11-93.17-44.83T296-456q-74.33-8.33-125.17-61.83Q120-571.33 120-645.33V-688q0-27.67 19.5-47.17t47.17-19.5h96V-840h394.66v85.33h96q27.67 0 47.17 19.5T840-688v42.67q0 74-50.83 127.5Q738.33-464.33 664-456q-16.67 50.67-57.5 84.5t-93.17 44.83v140H668V-120H292Zm-9.33-406.67V-688h-96v42.67q0 42.66 27 75.16t69 43.5Zm394.66 0q42-11 69-43.5t27-75.16V-688h-96v161.33Z"/>
           </svg>
         </button>
       </div>

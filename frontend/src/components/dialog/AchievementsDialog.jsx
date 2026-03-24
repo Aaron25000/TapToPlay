@@ -1,6 +1,7 @@
-import styles from './Achievements.module.css'; 
+import Dialog from "./Dialog";
+import styles from "./AchievementsDialog.module.css";
 
-const AchievementsView = () => {
+const AchievementsDialog = ({ onClose }) => {
   const achievements = [
     { id: 1, title: "First Note", desc: "Complete your first song tutorial.", icon: "/assets/FirstNote.svg" },
     { id: 2, title: "Piano Virtuoso", desc: "Achieve a 100% accuracy on any song.", icon: "/assets/PianoVirtuoso.svg" },
@@ -11,7 +12,10 @@ const AchievementsView = () => {
   ];
 
   return (
-    <div className={styles.pageContainer}>
+    <Dialog
+      title='Achievements'
+      onClose={onClose}
+    >
       <div className={styles.achievementsGrid}>
         {achievements.map((item) => (
           <div key={item.id} className={styles.achievementCard}>
@@ -27,8 +31,8 @@ const AchievementsView = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Dialog>
   );
 };
 
-export default AchievementsView;
+export default AchievementsDialog;
