@@ -1,0 +1,38 @@
+const API_BASE = "http://localhost:5001";
+
+export const fetchSongs = async () => {
+  try {
+    const response = await fetch(`${API_BASE}/songs`);
+    if (!response.ok) throw new Error("Failed to fetch songs");
+    return await response.json();
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+export const fetchUsers = async () => {
+  try {
+    const response = await fetch(`${API_BASE}/users`);
+    if (!response.ok) throw new Error("Failed to fetch users");
+    return await response.json();
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+export const saveProgress = async (userId, progressData) => {
+  try {
+    const response = await fetch(`${API_BASE}/users/${userId}/progress`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(progressData),
+    });
+    if (!response.ok) throw new Error("Failed to save progress");
+    return await response.json();
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

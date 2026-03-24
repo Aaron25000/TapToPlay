@@ -5,6 +5,13 @@ const SongSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  artist: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String
+  },
   difficulty: {
     type: String,
     enum: ["easy", "medium", "hard"],

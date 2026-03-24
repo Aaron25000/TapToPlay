@@ -1,0 +1,44 @@
+### Variables
+@hostname = localhost
+@port = 5001
+@baseUrl = http://{{hostname}}:{{port}}
+
+### 1. Test Root Route
+GET {{baseUrl}}/
+Accept: application/json
+
+###
+
+### 2. Get All Songs
+GET {{baseUrl}}/songs
+Accept: application/json
+
+###
+
+### 3. Add a New Song
+POST {{baseUrl}}/songs
+Content-Type: application/json
+
+{
+    "title": "Bohemian Rhapsody",
+    "artist": "Queen",
+    "album": "A Night at the Opera"
+}
+
+###
+
+### 4. Get All Users
+GET {{baseUrl}}/users
+Accept: application/json
+
+###
+
+### 5. Register a New User
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+    "username": "aaron_m",
+    "email": "aaron@example.com",
+    "password": "securePassword123"
+}
