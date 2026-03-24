@@ -1,43 +1,81 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
-const Song = require("./models/song"); 
+const mongoose = require('mongoose');
+require('dotenv').config();
+const Song = require('./models/song');
+const User = require('./models/user');
 
 const MONGO_URI = process.env.MONGO_URI;
 
-const songs = [
+mongoose.connect(MONGO_URI)
+  .then(() => console.log('MongoDB connected!'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
+const seedSongs = [
   {
-    title: "C Major Scale",
-    notes: ["C", "D", "E", "F", "G", "A", "B", "C2", "D2", "E2"]
+    title: 'Twinkle Twinkle Little Star',
+    artist: 'Traditional',
+    difficulty: 'easy',
+    notes: [
+      { note: 'C' },
+      { note: 'C' },
+      { note: 'G' },
+      { note: 'G' },
+      { note: 'A' },
+      { note: 'A' },
+      { note: 'G' }
+    ]
   },
   {
-    title: "Twinkle Twinkle Little Star",
-    notes: ["C", "C", "G", "G", "A", "A", "G", "F", "F", "E", "E", "D", "D", "C"]
+    title: 'Mary Had a Little Lamb',
+    artist: 'Traditional',
+    difficulty: 'easy',
+    notes: [
+      { note: 'E' },
+      { note: 'D' },
+      { note: 'C' },
+      { note: 'D' },
+      { note: 'E' },
+      { note: 'E' },
+      { note: 'E' }
+    ]
   },
   {
-    title: "Mary Had a Little Lamb",
-    notes: ["E", "D", "C", "D", "E", "E", "E", "D", "D", "D", "E", "G", "G"]
-  },
-  {
-    title: "Simple Arpeggio",
-    notes: ["C", "E", "G", "C2", "G", "E", "C"]
-  },
-  {
-    title: "Happy Birthday",
-    notes: ["C", "C", "D", "C", "F", "E", "C", "C", "D", "C", "G", "F"]
+    title: 'Hot Cross Buns',
+    artist: 'Traditional',
+    difficulty: 'easy',
+    notes: [
+      { note: 'E' },
+      { note: 'D' },
+      { note: 'C' },
+      { note: 'E' },
+      { note: 'D' },
+      { note: 'C' }
+    ]
   }
 ];
 
-mongoose.connect(MONGO_URI)
-  .then(async () => {
-    console.log("MongoDB connected. Seeding songs...");
+const seedUsers = [
+  {
+    username: 'TapToPlayTeam',
+    password: 'TapToPlay' // in production, hash passwords
+  }
+];
 
+async function seedDatabase() {
+  try {
     await Song.deleteMany({});
-    
-    await Song.insertMany(songs);
+    await User.deleteMany({});
 
-    console.log("Songs seeded successfully!");
-    mongoose.connection.close();
-  })
-  .catch(err => {
-    console.error("MongoDB connection error:", err);
-  });
+    const insertedSongs = await Song.insertMany(seedSongs);
+    console.log(`Seeded ${insertedSongs.length} songs`);
+
+    const insertedUsers = await User.insertMany(seedUsers);
+    console.log(`Seeded ${insertedUsers.length} users`);
+
+    mongoose.disconnect();
+    console.log('Database seeding complete!');
+  } catch (err) {
+    console.error('Error seeding database:', err);
+  }
+}
+
+seedDatabase();
