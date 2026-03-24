@@ -5,7 +5,7 @@ Team Billy Joel
 ## 1. Getting Started
 ### 1.1 Requirements
 * Latest version of Node.js.
-* Python3 installed.
+* MongoDB Community edition (optional for dev).
 
 ### 1.2 Cloning the Repo
 Clone the repo using `git clone https://github.com/Aaron25000/TapToPlay.git`
@@ -18,11 +18,10 @@ This should open up a web browser page, if not you can visit http://localhost:30
 
 ### 1.4. Backend Setup
 1. Move to the **backend** directory.
-2. Install dependacies: `pip install -r requirements.txt`.
-3. Fianlly run the server:  
-*Mac/Linux* `python3 app.py`.  
-*Windows*`python app.py`.
-
+2. Install packages using `npm install`.
+3. Place `.env` file (*found in the MS Teams chat*) into the `backend` folder. 
+4. Seed database by running `node seed.js`.
+5. Run the server using `node server.js`.
 
 ## 2. Contributing
 
@@ -42,3 +41,9 @@ This should open up a web browser page, if not you can visit http://localhost:30
 2. You should see **"Compare & Pull Request"** button, click it!
 3. Then click **"Create Pull Request"**, don't worry about writting a description.
 4. The Team Coordinator will review your code for merge errors.
+
+### 2.4 Updating Your Branch
+Recomended before merging your code to main.
+1. Change to your branch `git checkout your-name`
+2. Fetch changes by `git fetch origin`
+3. Update your branch `git merge origin/main`
