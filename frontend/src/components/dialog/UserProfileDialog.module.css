@@ -1,20 +1,24 @@
-/* Left sidebar section */
+/* UserProfileDialog.module.css */
+
+/* Left sidebar section - Frosted glass effect */
 .profileSidebar {
     width: 280px;
-    background: #f8f9fa;
+    background: rgba(255, 255, 255, 0.05); /* Translucent white */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
     overflow-y: auto;
 }
 
-/* Large user avatar circle */
+/* Large user avatar circle with glow */
 .userAvatarLarge {
     width: 100px;
     height: 100px;
-    background: linear-gradient(90deg, #0076de 0%, #0087fd 100%);
+    background: linear-gradient(135deg, #0076de 0%, #0087fd 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -23,23 +27,25 @@
     font-weight: bold;
     color: white;
     margin-bottom: 15px;
-    box-shadow: 0 5px 15px rgba(32, 99, 215, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 118, 222, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .userName {
     font-size: 1.5rem;
-    color: #333;
+    color: #ffffff;
     margin: 0 0 5px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .userEmail {
-    color: #666;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
     margin: 0 0 5px 0;
 }
 
 .userJoinDate {
-    color: #999;
+    color: rgba(255, 255, 255, 0.4);
     font-size: 0.85rem;
     margin: 0 0 20px 0;
 }
@@ -51,8 +57,8 @@
     width: 100%;
     margin: 20px 0;
     padding: 15px 0;
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .quickStatItem {
@@ -61,15 +67,17 @@
 
 .quickStatValue {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    color: #2063d7;
+    color: #0087fd;
 }
 
 .quickStatLabel {
     display: block;
-    font-size: 0.85rem;
-    color: #666;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* User level and experience bar */
@@ -81,87 +89,88 @@
 .levelInfo {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     font-size: 0.9rem;
-    color: #666;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .expBar {
     width: 100%;
     height: 8px;
-    background: #e0e0e0;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Experience progress bar fill */
 .expFill {
     height: 100%;
-    background: linear-gradient(90deg, #0076de 0%, #0087fd 100%);
+    background: linear-gradient(90deg, #0076de 0%, #1DBFAF 100%);
     border-radius: 4px;
-    transition: width 0.3s ease;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(0, 135, 253, 0.5);
 }
 
-/* Main content area on the right */
+/* Main content area */
 .profileMain {
     flex: 1;
     padding: 30px;
     overflow-y: auto;
+    background: rgba(255, 255, 255, 0.02);
 }
 
-/* Tab navigation */
+/* Tab navigation - Glass tabs */
 .profileTabs {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 25px;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 10px;
 }
 
 .tabButton {
-    background: none;
+    background: transparent;
     border: none;
-    padding: 8px 16px;
+    padding: 8px 20px;
     font-size: 1rem;
     font-weight: 500;
-    color: #666;
+    color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     position: relative;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    border-radius: 8px;
 }
 
 .tabButton:hover {
-    color: #2063d7;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .tabButton.active {
-    color: #2063d7;
-    font-weight: 600;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-/* Active tab underline indicator */
 .tabButton.active::after {
     content: '';
     position: absolute;
-    bottom: -12px;
-    left: 0;
-    right: 0;
+    bottom: -11px;
+    left: 15%;
+    right: 15%;
     height: 3px;
-    background: #2063d7;
+    background: #0087fd;
     border-radius: 3px 3px 0 0;
-}
-
-.tabContent {
-    flex: 1;
+    box-shadow: 0 0 10px #0087fd;
 }
 
 .tabContent h3 {
-    color: #333;
+    color: #fff;
     margin-bottom: 20px;
     font-size: 1.2rem;
+    font-weight: 500;
 }
 
-/* Recent activity list */
+/* Recent activity list - Floating glass items */
 .activityList {
     display: flex;
     flex-direction: column;
@@ -172,112 +181,46 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    transition: all 0.2s;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    transition: all 0.3s ease;
 }
 
 .activityItem:hover {
-    background: #f0f0f0;
-    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(8px);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .activityIcon {
-    width: 40px;
-    height: 40px;
-    background: white;
-    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.activityDetails {
-    flex: 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .activityDetails p {
     margin: 0 0 4px 0;
-    color: #333;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .activityDetails strong {
-    color: #2063d7;
+    color: #0087fd;
 }
 
 .activityTime {
     font-size: 0.85rem;
-    color: #999;
+    color: rgba(255, 255, 255, 0.4);
 }
 
-/* Achievements grid layout */
-.achievementsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-.achievementCard {
-    background: #f8f9fa;
-    border-radius: 10px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    position: relative;
-    transition: all 0.2s;
-}
-
-.achievementCard:not(.locked):hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-/* Locked achievement styling */
-.achievementCard.locked {
-    opacity: 0.6;
-    filter: grayscale(0.5);
-}
-
-.achievementIcon {
-    width: 40px;
-    height: 40px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.achievementInfo {
-    flex: 1;
-}
-
-.achievementInfo h4 {
-    margin: 0 0 4px 0;
-    font-size: 1rem;
-    color: #333;
-}
-
-.achievementInfo p {
-    margin: 0;
-    font-size: 0.85rem;
-    color: #666;
-}
-
-.lockedOverlay {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 14px;
-}
-
-/* Statistics cards grid */
+/* Statistics cards grid - Frosted tiles */
 .statsGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -285,26 +228,29 @@
 }
 
 .statCard {
-    background: #f8f9fa;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     padding: 20px;
     display: flex;
     align-items: center;
     gap: 15px;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
 .statCard:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Stat icon with gradient background */
 .statIcon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #2063d7 0%, #1DBFAF 100%);
-    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(32, 99, 215, 0.4) 0%, rgba(29, 191, 175, 0.4) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,8 +264,8 @@
 
 .statLabel {
     display: block;
-    font-size: 0.9rem;
-    color: #666;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
     margin-bottom: 4px;
 }
 
@@ -327,19 +273,15 @@
     display: block;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: #fff;
 }
 
-/* Responsive design for tablets and mobile */
+/* Responsive design */
 @media (max-width: 768px) {
-    .profileContent {
-        flex-direction: column;
-    }
-    
     .profileSidebar {
         width: 100%;
         border-right: none;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .statsGrid {

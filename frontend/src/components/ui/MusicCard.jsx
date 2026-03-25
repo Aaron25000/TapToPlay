@@ -4,13 +4,13 @@ import styles from "./MusicCard.module.css";
 const getDifficultyInfo = (difficulty) => {
   switch(difficulty) {
     case 'easy':
-      return { color: '#4CAF50', text: 'easy', emoji: '🟢' };
+      return { color: '#4CAF50', text: 'easy'};
     case 'medium':
-      return { color: '#FF9800', text: 'medium', emoji: '🟡' };
+      return { color: '#FF9800', text: 'medium' };
     case 'hard':
-      return { color: '#000000', text: 'hard', emoji: '⚫' };
+      return { color: '#000000', text: 'hard' };
     default:
-      return { color: '#4CAF50', text: 'easy', emoji: '🟢' };
+      return { color: '#4CAF50', text: 'easy' };
   }
 };
 
@@ -44,7 +44,7 @@ const MusicCard = ({ song, onPlay }) => {
             className={styles.difficulty}
             style={{ backgroundColor: difficulty.color }}
           >
-            {difficulty.emoji} {difficulty.text}
+            {difficulty.text}
           </div>
           <button className={styles.playButton} onClick={handlePlayClick}>
             Play ▶

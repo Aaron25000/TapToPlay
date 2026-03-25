@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Topbar from "../components/ui/Topbar";
+import SearchBar from "../components/ui/SearchBar";
 import MusicCard from "../components/ui/MusicCard";
 import UserProfileDialog from "../components/dialog/UserProfileDialog";
 import AchievementsDialog from '../components/dialog/AchievementsDialog';
@@ -38,10 +39,11 @@ const SongSelectionView = ({ onSelectSong }) => {
         onUserProfile={openProfile}
         onAchievements={() => setShowAchievements(true)}
       >
-        <span className={styles.topbarTitle}>Song Selection</span>
+        <span className={styles.topbarTitle}>Songs...</span>
       </Topbar>
 
       <main className={styles.viewContainer}>
+        <SearchBar />
         <div className={styles.grid}>
           {songs.map((song) => (
             <MusicCard

@@ -1,0 +1,113 @@
+/* Container */
+.searchSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 20px;
+  max-width: 1200px; 
+  margin: 0 auto;    
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  /* 1. Increase white opacity (0.15 to 0.2) to block the pink bleed */
+  background: rgba(255, 255, 255, 0.2); 
+  
+  /* 2. Heavy blur (25px) is the secret to making it look like thick glass, not a thin film */
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  
+  /* 3. A stronger white border gives it a 'edge' */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+  border-radius: 50px;
+  width: 100%;
+  max-width: 480px;
+  padding: 5px 10px 5px 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  /* Pure white text so it stands out */
+  color: #ffffff;
+  background: transparent;
+}
+
+.searchInput::placeholder {
+  /* Make the placeholder bright enough to see */
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Search Button remains glass-styled */
+.searchBtn {
+  background: rgba(255, 255, 255, 0.2); 
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.2s;
+  display: flex !important; /* Forces it to stay visible */
+  align-items: center;
+  justify-content: center;
+}
+
+.searchBtn:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+/* --- Filter Chips Glass --- */
+.filterScroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  width: 100%;
+  justify-content: center; 
+  padding: 4px 0 12px 0;
+  scrollbar-width: none;
+}
+
+.filterChip {
+  padding: 8px 22px;
+  /* Frosted pebble look */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.filterChip:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.filterChipActive {
+  /* Active chip looks like lit glass */
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
