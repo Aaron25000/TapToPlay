@@ -1,4 +1,7 @@
-const API_BASE = "http://localhost:5001";
+console.log("Full Env:", import.meta.env);
+console.log("My API URL:", import.meta.env.VITE_API_BASE);
+
+const API_BASE = import.meta.env.VITE_API_BASE //|| "http://localhost:5001";
 
 export const fetchSongs = async () => {
   try {

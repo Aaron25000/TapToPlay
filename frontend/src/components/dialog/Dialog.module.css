@@ -4,21 +4,19 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  animation: fadeIn 0.3s ease-in;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .dialogContainer {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+
   width: 90%;
   max-width: 1000px;
   height: 80%;
@@ -31,21 +29,11 @@
   animation: slideUp 0.3s ease-out;
 }
 
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 
 .dialogHeader {
   padding: 20px 30px;
-  background: linear-gradient(90deg, #0076de 0%, #0087fd 100%);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   position: relative;
@@ -54,21 +42,25 @@
 .dialogHeader h1 {
   margin: 0;
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 700;
   flex: 1;
   text-align: center;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
 .dialogCloseBtn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  font-size: 20px;
+  font-size: 18px;
   width: 36px;
   height: 36px;
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dialogCloseBtn:hover {
@@ -81,4 +73,15 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }

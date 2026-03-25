@@ -2,7 +2,16 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f8f9fa;
+  width: 100%;
+  background: linear-gradient(
+    145deg, 
+    #1a0b2e 0%,    /* Keeps the Topbar icons visible */
+    #7300ff 20%,   /* Deep Purple bridge */
+    #ff4500 50%,   /* Rich Orange-Red heart */
+    #ff8c00 75%,   /* Vibrant Orange */
+    #ffcc33 100%   /* Bright Amber Yellow at the bottom */
+  );
+  background-attachment: fixed;
 }
 
 .topbarTitle {
@@ -12,43 +21,42 @@
 }
 
 .viewContainer {
-  padding: 2rem;
+  padding: 0 5%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 40px auto;
   width: 100%;
   box-sizing: border-box;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
-  gap: 2rem;
+  grid-template-columns: repeat(4, 280px);
+  justify-content: center; 
+  gap: 24px; 
   width: 100%;
-  align-items: start;
 }
 
-/* Tablet */
-@media (max-width: 1024px) {
+/* Tablet (iPad Mini) - Exact 3 wide */
+@media (max-width: 1220px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 280px);
+    gap: 24px; /* Stays exactly the same */
   }
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .viewContainer {
-    padding: 1rem;
-  }
-
+/* Smaller Tablet / Large Phone - Exact 2 wide */
+@media (max-width: 930px) {
   .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(2, 280px);
+    gap: 24px; /* Stays exactly the same */
   }
 }
 
-/* Small phones */
-@media (max-width: 480px) {
+/* Mobile - 1 wide */
+@media (max-width: 620px) {
   .grid {
-    grid-template-columns: 1fr;
+    /* On tiny screens, we allow it to fill the width so it doesn't overflow */
+    grid-template-columns: minmax(200px, 320px);
+    gap: 24px;
   }
 }
