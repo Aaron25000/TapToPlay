@@ -12,10 +12,11 @@
 }
 
 .dialogContainer {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(40px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
+  /* Using 'High' scale for the main container */
+  background: var(--glass-surface-high);
+  backdrop-filter: var(--blur-high);
+  border: 1px solid var(--border-glass-thick);
+  color: var(--text-primary);
 
   width: 90%;
   max-width: 1000px;
@@ -29,11 +30,11 @@
   animation: slideUp 0.3s ease-out;
 }
 
-
 .dialogHeader {
   padding: 20px 30px;
-  background: rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  /* Using 'Thick' for the header bar tint */
+  background: var(--glass-surface-thick);
+  border-bottom: 1px solid var(--border-glass-base);
   display: flex;
   align-items: center;
   position: relative;
@@ -49,9 +50,9 @@
 }
 
 .dialogCloseBtn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background: var(--glass-surface-thick);
+  border: 1px solid var(--border-glass-base);
+  color: var(--text-primary);
   font-size: 18px;
   width: 36px;
   height: 36px;
@@ -61,10 +62,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  right: 20px;
 }
 
 .dialogCloseBtn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--glass-surface-high);
   transform: scale(1.1);
 }
 

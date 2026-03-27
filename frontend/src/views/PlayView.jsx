@@ -1,36 +1,44 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TextPill from "../components/ui/TextPill";
 import Topbar from "../components/ui/Topbar";
 import ProgressBar from "../components/ui/ProgressBar";
 import StarRating from "../components/ui/StarRating";
-import { getSongNotes } from "../services/musicService";
+
 import { Piano } from '../components/insturments/Piano';
+import { Drums } from "../components/insturments/Drums";
+
+import { fetchSongById } from "../api/songs";
 import styles from './PlayView.module.css';
 
+const INSTRUMENT_COMPONENTS = {
+  piano: Piano,
+  drums: Drums
+};
+
 const PlayView = () => {
+  const { songId, instrumentId } = useParams();
   const navigate = useNavigate();
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [songNotes, setSongNotes] = useState([]);
+  const [song, setSong] = useState(null);
   const [attemptHistory, setAttemptHistory] = useState([]);
-  const song = [];
 
   useEffect(() => {
-    // Dynamically load notes based on the song passed via props
-    if (song?.id) {
-      getSongNotes(song.id)
-        .then(data => {
-          const notes = data.notes || [];
-          setSongNotes(notes);
-          setAttemptHistory(new Array(notes.length).fill('default'));
-          setCurrentIndex(0); // Reset if song changes
-        })
-        .catch(err => console.error("Could not load song", err));
-    }
-  }, [song]);
+    const loadData = async () => {
+      const songData = await fetchSongById(songId);
+      if (songData) {
+        setSong(songData);
+        // Correctly initialize based on the notes array inside the song object
+        setAttemptHistory(new Array(songData.notes?.length || 0).fill('default'));
+      }
+    };
+    loadData();
+  }, [songId]);
 
   const handleNoteResult = (isCorrect) => {
-    if (songNotes.length === 0 || currentIndex >= songNotes.length) return;
+    // Guard against null song or out of bounds
+    if (!song?.notes || currentIndex >= song.notes.length) return;
 
     setAttemptHistory((prev) => {
       const newHistory = [...prev];
@@ -41,8 +49,12 @@ const PlayView = () => {
     setCurrentIndex((prev) => prev + 1);
   };
 
-  const progressSegments = attemptHistory.map((status) => ({ status }));
-  const isFinished = songNotes.length > 0 && currentIndex >= songNotes.length;
+  // Guard against invalid instrument in URL
+  const SelectedInstrument = INSTRUMENT_COMPONENTS[instrumentId?.toLowerCase()] || Piano;
+
+  // Fixed typo: .length
+  const totalNotes = song?.notes?.length || 0; 
+  const isFinished = totalNotes > 0 && currentIndex >= totalNotes;
   const correctNotes = attemptHistory.filter(status => status === 'green').length;
 
   return (
@@ -52,21 +64,24 @@ const PlayView = () => {
       </Topbar>
 
       <div className={styles.progressWrapper}>
-        <ProgressBar segments={progressSegments} />
+        <ProgressBar segments={attemptHistory.map(status => ({ status }))} />
       </div>
 
       <div className={styles.instrumentContainer}>
-        {/* We render the passed component here */}
-        <Piano
-          expectedNote={''} 
-          onNotePlayed={() => {}} 
-        />
+        {song ? (
+          <SelectedInstrument
+            expectedNote={song?.notes?.[currentIndex]?.note || ""}
+            onNotePlayed={(isCorrect) => handleNoteResult(isCorrect)}
+          />
+        ) : (
+          <div className={styles.loader}>Loading Music...</div>
+        )}
       </div>
 
       {isFinished &&
         <StarRating
           value={correctNotes}
-          max={songNotes.length}
+          max={totalNotes} // Changed from song.length to totalNotes
           onClose={() => navigate('/')}
         />
       }

@@ -14,6 +14,17 @@ export const fetchSongs = async () => {
   }
 };
 
+export const fetchSongById = async (id) => {
+  try {
+    const response = await fetch(`${API_BASE}/songs/${id}`);
+    if (!response.ok) throw new Error("Failed to fetch song by id");
+    return await response.json();
+  } catch (err) {
+    console.log(err)
+    return null;
+  }
+}
+
 export const fetchUsers = async () => {
   try {
     const response = await fetch(`${API_BASE}/users`);

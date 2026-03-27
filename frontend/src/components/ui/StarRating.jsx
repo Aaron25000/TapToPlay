@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from "../ui/Card";
 import styles from './StarRating.module.css';
 
 const StarRating = ({ value = 0, max = 5, onClose }) => {
@@ -19,7 +20,7 @@ const StarRating = ({ value = 0, max = 5, onClose }) => {
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.modal}>
+      <Card>
         {/* FIX 1: Pass 'ratio' to getMessage, not 'starsFilled' */}
         <h2 className={styles.message}>{getMessage(ratio)}</h2>
         
@@ -43,7 +44,7 @@ const StarRating = ({ value = 0, max = 5, onClose }) => {
         <button className={styles.finishBtn} onClick={onClose}>
           Finish
         </button>
-      </div>
+      </Card>
     </div>
   );
 };

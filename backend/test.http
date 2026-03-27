@@ -15,7 +15,10 @@ Accept: application/json
 
 ###
 
-### 3. Add a New Song
+### 3. Get Song by Id
+GET {{baseUrl}}/songs/69c2bb2b977c49ce5bd83987
+
+### 4. Add a New Song
 POST {{baseUrl}}/songs
 Content-Type: application/json
 
@@ -27,13 +30,13 @@ Content-Type: application/json
 
 ###
 
-### 4. Get All Users
+### 5. Get All Users
 GET {{baseUrl}}/users
 Accept: application/json
 
 ###
 
-### 5. Register a New User
+### 6. Register a New User
 POST {{baseUrl}}/users/register
 Content-Type: application/json
 

@@ -1,0 +1,28 @@
+:root {
+  /* Surfaces - Layered by opacity */
+  --glass-surface-thin: rgba(255, 255, 255, 0.03);
+  --glass-surface-base: rgba(255, 255, 255, 0.05);
+  --glass-surface-thick: rgba(255, 255, 255, 0.1);
+  --glass-surface-high: rgba(255, 255, 255, 0.2);
+  
+  /* Blurs - Scale of intensity */
+  --blur-low: blur(8px);
+  --blur-med: blur(12px);
+  --blur-high: blur(40px);
+  
+  /* Borders */
+  --border-glass-faint: rgba(255, 255, 255, 0.08);
+  --border-glass-thin: rgba(255, 255, 255, 0.1);
+  --border-glass-base: rgba(255, 255, 255, 0.2);
+  --border-glass-thick: rgba(255, 255, 255, 0.3);
+
+  /* Brand Colors & Accents */
+  --color-primary: #0087fd;
+  --color-primary-dark: #0076de;
+  --color-primary-glow: rgba(0, 118, 222, 0.4);
+  
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-dim: rgba(255, 255, 255, 0.4);
+}

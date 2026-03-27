@@ -3,7 +3,16 @@
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  background-color: white;
+  background: linear-gradient(
+    145deg, 
+    #1a0b2e 0%,    /* Keeps the Topbar icons visible */
+    #7300ff 20%,   /* Deep Purple bridge */
+    #ff4500 50%,   /* Rich Orange-Red heart */
+    #ff8c00 75%,   /* Vibrant Orange */
+    #ffcc33 100%   /* Bright Amber Yellow at the bottom */
+  );
+  background-attachment: fixed;
+  color: #fff;
 }
 
 .viewContainer {
@@ -13,7 +22,6 @@
   justify-content: center; /* Changed from flex-start to center for better balance */
   align-items: center;
   padding-bottom: 10vh; /* Nudge up slightly from absolute center */
-  color: black;
   width: 100%;
 }
 
@@ -33,6 +41,35 @@
   width: 100%;
 }
 
+.card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px);
+  padding: 30px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  transition: all ease-out 0.1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.selectBtn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  padding: 4px 20px;
+  border-radius: 30px;
+  font-size: 24px;
+  color: #fff;
+}
+
 .instrumentButtonGroup {
   background: none;
   border: none;
@@ -44,17 +81,7 @@
   transition: transform 0.2s ease, filter 0.2s ease; 
 }
 
-.instrumentButtonGroup:hover {
-  transform: scale(1.08);
-  filter: brightness(1.1);
-}
-
 .instrumentIcon {
   width: clamp(150px, 15vw, 220px); /* Scales based on screen width */
-  height: auto;
-}
-
-.labelImage {
-  width: clamp(100px, 10vw, 150px); 
   height: auto;
 }

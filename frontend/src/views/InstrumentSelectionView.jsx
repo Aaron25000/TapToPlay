@@ -11,24 +11,16 @@ const InstrumentSelectionView = ({ song, onHome, onSelectInstrument }) => {
   return (
     <div className={styles.appContainer}>
       {/* Pass onHome to the Topbar to enable the Home icon/Logo functionality */}
-      <Topbar onHome={onHome}>
-        <TextPill text={`${displayTitle}`} />
-      </Topbar>
+      <Topbar onHome={onHome} />
       
       <div className={styles.viewContainer}>
         <h1 className={styles.title}>Choose an Instrument</h1>
         
         <div className={styles.instrumentContainer}>
-          {/* Piano */}
-          <button
-            className={styles.instrumentButtonGroup}
-            onClick={() => navigate('/Play')}
-          >
-            <div className={styles.iconCircle}>
-              <img src="/assets/Piano Instrument.png" className={styles.instrumentIcon} alt="Piano" />
-            </div>
-            <img src="/assets/PianoButton.png" className={styles.labelImage} alt="Piano Text" />
-          </button>
+          <div className={styles.card}>
+            <img src="/assets/Piano Instrument.png" className={styles.instrumentIcon} alt="Piano" />
+            <button className={styles.selectBtn}>Piano</button>
+          </div>
 
           {/* Drums */}
           <button 
