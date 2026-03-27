@@ -1,4 +1,4 @@
-import styles from './Dialog.module.css'
+import styles from './Dialog.module.css';
 
 const Dialog = ({ title, onClose, children }) => {
   return (

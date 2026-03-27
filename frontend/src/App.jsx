@@ -8,8 +8,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<SongSelectionView />} />
-        <Route path="/instrument/:songId" element={<InstrumentSelectionView />} />
-        <Route path="/Play" element={<PlayView />} />
+        <Route path="/play/:songId/:instrumentId" element={<PlayView />} />
       </Routes>
     </Router>
   );
