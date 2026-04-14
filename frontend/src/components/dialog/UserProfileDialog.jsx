@@ -4,19 +4,8 @@ import styles from "./UserProfileDialog.module.css";
 
 const UserProfileDialog = ({ user, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'achievements', 'stats'
-  const [userStats] = useState({
-    username: user?.username || 'MusicLover',
-    joinDate: 'January 2026',
-    totalSongsPlayed: 157,
-    totalPracticeTime: '42 hours',
-    achievements: 12,
-    currentStreak: 7,
-    longestStreak: 15,
-    favoriteGenre: 'Pop',
-    level: 8,
-    experience: 2340,
-    nextLevelExp: 3000
-  });
+
+  console.log(user);
 
   const recentActivities = [
     { id: 1, action: 'Played', song: 'Bohemian Rhapsody', artist: 'Queen', time: '2 hours ago' },
@@ -26,7 +15,7 @@ const UserProfileDialog = ({ user, onClose }) => {
     { id: 5, action: 'Played', song: 'Something Just Like This', artist: 'The Chainsmokers', time: '4 days ago' },
   ];
 
-  const expPercentage = (userStats.experience / userStats.nextLevelExp) * 100;
+  const expPercentage = (user.experience / user.nextLevelExp) * 100;
 
   return (
     <Dialog
@@ -36,23 +25,22 @@ const UserProfileDialog = ({ user, onClose }) => {
       {/* Left sidebar - user info and quick stats */}
       <div className={styles.profileSidebar}>
           <div className={styles.userAvatarLarge}>
-              {userStats.username.charAt(0).toUpperCase()}
+              {user.username.charAt(0).toUpperCase()}
           </div>
-          <h2 className={styles.userName}>{userStats.username}</h2>
-          <p className={styles.userEmail}>{userStats.email}</p>
-          <p className={styles.userJoinDate}>Member since {userStats.joinDate}</p>
+          <h2 className={styles.userName}>{user.username}</h2>
+          <p className={styles.userJoinDate}>Member since {user.joinDate}</p>
 
           <div className={styles.quickStats}>
               <div className={styles.quickStatItem}>
-                  <span className={styles.quickStatValue}>{userStats.totalSongsPlayed}</span>
+                  <span className={styles.quickStatValue}>{user.completedSongs.lenght || 0}</span>
                   <span className={styles.quickStatLabel}>Songs</span>
               </div>
               <div className={styles.quickStatItem}>
-                  <span className={styles.quickStatValue}>{userStats.achievements}</span>
+                  <span className={styles.quickStatValue}>{user.achievements.lenght || 0}</span>
                   <span className={styles.quickStatLabel}>Badges</span>
               </div>
               <div className={styles.quickStatItem}>
-                  <span className={styles.quickStatValue}>{userStats.currentStreak}</span>
+                  <span className={styles.quickStatValue}>{user.currentStreak || 0}</span>
                   <span className={styles.quickStatLabel}>Streak</span>
               </div>
           </div>
@@ -60,8 +48,8 @@ const UserProfileDialog = ({ user, onClose }) => {
           {/* Experience level indicator */}
           <div className={styles.levelContainer}>
               <div className={styles.levelInfo}>
-                  <span>Level {userStats.level}</span>
-                  <span>{userStats.experience}/{userStats.nextLevelExp} XP</span>
+                  <span>Level {user.level}</span>
+                  <span>{user.experience}/{user.nextLevelExp} XP</span>
               </div>
               <div className={styles.expBar}>
                   <div 
@@ -127,7 +115,7 @@ const UserProfileDialog = ({ user, onClose }) => {
                               <div className={styles.statIcon}>🎵</div>
                               <div className={styles.statDetails}>
                                   <span className={styles.statLabel}>Total Songs</span>
-                                  <span className={styles.statNumber}>{userStats.totalSongsPlayed}</span>
+                                  <span className={styles.statNumber}>{user.completedSongs}</span>
                               </div>
                           </div>
 
@@ -135,7 +123,7 @@ const UserProfileDialog = ({ user, onClose }) => {
                               <div className={styles.statIcon}>⏱️</div>
                               <div className={styles.statDetails}>
                                   <span className={styles.statLabel}>Practice Time</span>
-                                  <span className={styles.statNumber}>{userStats.totalPracticeTime}</span>
+                                  <span className={styles.statNumber}>{user.totalPracticeTime}</span>
                               </div>
                           </div>
 
@@ -143,7 +131,7 @@ const UserProfileDialog = ({ user, onClose }) => {
                               <div className={styles.statIcon}>🏆</div>
                               <div className={styles.statDetails}>
                                   <span className={styles.statLabel}>Achievements</span>
-                                  <span className={styles.statNumber}>{userStats.achievements}</span>
+                                  <span className={styles.statNumber}>{user.achievements.lenght}</span>
                               </div>
                           </div>
 
@@ -151,7 +139,7 @@ const UserProfileDialog = ({ user, onClose }) => {
                               <div className={styles.statIcon}>🔥</div>
                               <div className={styles.statDetails}>
                                   <span className={styles.statLabel}>Current Streak</span>
-                                  <span className={styles.statNumber}>{userStats.currentStreak} days</span>
+                                  <span className={styles.statNumber}>{user.currentStreak} days</span>
                               </div>
                           </div>
 
@@ -159,7 +147,7 @@ const UserProfileDialog = ({ user, onClose }) => {
                               <div className={styles.statIcon}>📈</div>
                               <div className={styles.statDetails}>
                                   <span className={styles.statLabel}>Longest Streak</span>
-                                  <span className={styles.statNumber}>{userStats.longestStreak} days</span>
+                                  <span className={styles.statNumber}>{user.longestStreak} days</span>
                               </div>
                           </div>
 
@@ -167,7 +155,7 @@ const UserProfileDialog = ({ user, onClose }) => {
                               <div className={styles.statIcon}>🎸</div>
                               <div className={styles.statDetails}>
                                   <span className={styles.statLabel}>Favorite Genre</span>
-                                  <span className={styles.statNumber}>{userStats.favoriteGenre}</span>
+                                  <span className={styles.statNumber}>{user.favoriteGenre}</span>
                               </div>
                           </div>
                       </div>

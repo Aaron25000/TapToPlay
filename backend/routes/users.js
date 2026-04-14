@@ -12,6 +12,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get user by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId).populate("completedSongs");
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // POST create new user
 router.post("/", async (req, res) => {
   try {
