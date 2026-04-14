@@ -3,6 +3,10 @@ require('dotenv').config();
 const Song = require('./models/song');
 const User = require('./models/user');
 
+const userData = require('./data/users.json')
+
+console.log(userData);
+
 const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI)
@@ -97,8 +101,10 @@ async function seedDatabase() {
     const insertedSongs = await Song.insertMany(seedSongs);
     console.log(`Seeded ${insertedSongs.length} songs`);
 
-    const insertedUsers = await User.insertMany(seedUsers);
-    console.log(`Seeded ${insertedUsers.length} users`);
+    if (userData && userData.users) {
+      const insertedUsers = await User.insertMany(userData.users);
+      console.log(`Seeded ${insertedUsers.length} users`);
+    }
 
     mongoose.disconnect();
     console.log('Database seeding complete!');

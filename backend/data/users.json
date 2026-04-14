@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "username": "Test User",
+      "joinDate": "April 2026",
+      "currentStreak": 0,
+      "longestStreak": 0,
+      "favoriteGenra": null,
+      "level": 0,
+      "experience": 0,
+      "nextLevelExp": 0,
+      "completedSongs": [],
+      "achievements": []
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "songs": [
+    {
+      "title": "Treat You Better",
+      "artist": "Shawn Mendes",
+      "image": null,
+      "difficulty": "medium",
+      "notes": [
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "G"}, {"note": "A"},
+        {"note": "G"}, {"note": "F"}, {"note": "D"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "G"}, {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "F"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "G"}, {"note": "A"}, {"note": "C2"},
+        {"note": "C2"}, {"note": "C2"}, {"note": "C2"}, {"note": "C2"}, {"note": "A"}, {"note": "D2"}, {"note": "C2"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "G"}, {"note": "F"}, {"note": "F"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "G"}, {"note": "F"}
+      ]
+    },
+    {
+      "title": "Main Theme",
+      "artist": "Superman (John Williams)",
+      "image": null,
+      "difficulty": "medium",
+      "notes": [
+        {"note": "G"}, {"note": "G"},
+        {"note": "C2"},
+        {"note": "G"}, {"note": "G"},
+        {"note": "C2"}, {"note": "G"},
+        {"note": "C2"}, {"note": "G"}, {"note": "F"}, {"note": "E"}, {"note": "D"},
+        {"note": "G"}, {"note": "G"},
+        {"note": "C2"},
+        {"note": "G"}, {"note": "G"},
+        {"note": "D2"},
+        {"note": "C2"}, {"note": "B"}, {"note": "C2"}, {"note": "D2"},
+        {"note": "G"}, {"note": "G"},
+        {"note": "E2"}, {"note": "D2"}, {"note": "C2"}, {"note": "G"},
+        {"note": "A"}, {"note": "B"}, {"note": "C2"}
+      ]
+    },
+    {
+      "title": "Don't Give Up (Sesame Street)",
+      "artist": "Bruno Mars",
+      "image": null,
+      "difficulty": "medium",
+      "notes": [
+        {"note": "G"}, {"note": "G"}, {"note": "G"}, {"note": "E"}, 
+        {"note": "G"}, {"note": "G"}, {"note": "G"}, {"note": "E"},
+        {"note": "G"}, {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "E"}, {"note": "D"},
+        {"note": "F"}, {"note": "F"}, {"note": "F"}, {"note": "D"},
+        {"note": "F"}, {"note": "F"}, {"note": "F"}, {"note": "D"},
+        {"note": "F"}, {"note": "G"}, {"note": "F"}, {"note": "E"}, {"note": "D"}, {"note": "C"},
+        {"note": "C"}, {"note": "D"}, {"note": "E"}, {"note": "F"}, {"note": "G"},
+        {"note": "A"}, {"note": "B"}, {"note": "C2"},
+        {"note": "C2"}, {"note": "D2"}, {"note": "C2"}
+      ]
+    },
+    {
+      "title": "Uptown Funk",
+      "artist": "Bruno Mars",
+      "image": null,
+      "difficulty": "easy",
+      "notes": [
+        {"note": "D"}, {"note": "D"}, {"note": "F"}, {"note": "D"}, {"note": "G"}, {"note": "D"}, {"note": "A"},
+        {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "D"},
+        {"note": "D"}, {"note": "D"}, {"note": "F"}, {"note": "D"}, {"note": "G"}, {"note": "D"}, {"note": "A"},
+        {"note": "D2"}, {"note": "C2"}, {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "D"},
+        {"note": "D"}, {"note": "D"}, {"note": "D"}, {"note": "D"}, {"note": "D"}, {"note": "D"},
+        {"note": "F"}, {"note": "G"}, {"note": "F"}, {"note": "G"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"},
+        {"note": "C2"}, {"note": "D2"}, {"note": "D2"}
+      ]
+    }
+  ]
+}
