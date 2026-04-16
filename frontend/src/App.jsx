@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import SongSelectionView from './views/SongSelectionView';
-import InstrumentSelectionView from './views/InstrumentSelectionView';
 import PlayView from './views/PlayView';
 
 const App = () => {
