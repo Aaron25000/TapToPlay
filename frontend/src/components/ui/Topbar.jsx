@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './Topbar.module.css';
 
-const Topbar = ({ children, onUserProfile, onAchievements }) => {
+const Topbar = ({ children, onUserProfile, onAchievements, onLoginClick}) => {
   const navigate = useNavigate();
 
   const handleHome = () => {
@@ -27,6 +27,16 @@ const Topbar = ({ children, onUserProfile, onAchievements }) => {
         {children}
       </div>
 
+      <div className={styles.rightSection}>
+        {/* Login Button */}
+        <button 
+          className={styles.loginButton} 
+          onClick={onLoginClick}
+        >
+          Login
+        </button>
+      </div>
+      
       <div className={styles.rightSection}>
         {/* User Profile Button */}
         <button className={styles.iconButton} onClick={onUserProfile} aria-label="User Profile">
