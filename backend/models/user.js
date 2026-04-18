@@ -38,7 +38,8 @@ const UserSchema = new mongoose.Schema({
   ],
   achievements: [
     {
-      type: String
+      type: String,
+      ref: "Achievement"
     }
   ]
 });
