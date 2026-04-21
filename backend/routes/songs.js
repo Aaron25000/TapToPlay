@@ -1,7 +1,7 @@
-const express = require("express");
-const router = express.Router();
-const Song = require("../models/Song");
+import express from "express";
+import Song from "../models/song.js";
 
+const router = express.Router();
 
 // GET all songs
 router.get("/", async (req, res) => {
@@ -38,4 +38,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

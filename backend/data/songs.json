@@ -3,7 +3,7 @@
     {
       "title": "Treat You Better",
       "artist": "Shawn Mendes",
-      "image": null,
+      "image": "assets/image/Shawn-Mendes.jpg",
       "difficulty": "medium",
       "notes": [
         {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "G"}, {"note": "F"}, {"note": "G"}, {"note": "A"},
@@ -18,7 +18,7 @@
     {
       "title": "Main Theme",
       "artist": "Superman (John Williams)",
-      "image": null,
+      "image": "assets/image/john-williams.jpeg",
       "difficulty": "medium",
       "notes": [
         {"note": "G"}, {"note": "G"},
@@ -67,6 +67,98 @@
         {"note": "F"}, {"note": "G"}, {"note": "F"}, {"note": "G"},
         {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"},
         {"note": "C2"}, {"note": "D2"}, {"note": "D2"}
+      ]
+    },
+    {
+      "title": "Shape of You",
+      "artist": "Ed Sheeran",
+      "image": "assets/image/Ed_Sheeran.webp",
+      "difficulty": "easy",
+      "notes": [
+        {"note": "A"}, {"note": "C2"}, {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "A"}, {"note": "B"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "B"},
+        {"note": "G"}, {"note": "G"}, {"note": "G"}, {"note": "G"}, {"note": "G"}, {"note": "B"}, {"note": "A"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "B"},
+        {"note": "G"}, {"note": "G"}, {"note": "B"}, {"note": "A"},
+        {"note": "E2"}, {"note": "D2"}, {"note": "C2"}, {"note": "B"}, {"note": "A"},
+        {"note": "A"}, {"note": "C2"}, {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "A"}, {"note": "B"}
+      ]
+    },
+    {
+      "title": "Your Idol",
+      "artist": "Saja Boys",
+      "image": null,
+      "difficulty": "medium",
+      "notes": [
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "B"}, {"note": "A"},
+        {"note": "G"}, {"note": "G"}, {"note": "G"}, {"note": "B"}, {"note": "A"}, {"note": "G"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "B"}, {"note": "A"},
+        {"note": "G"}, {"note": "G"}, {"note": "G"}, {"note": "B"}, {"note": "A"},
+        {"note": "A"}, {"note": "B"}, {"note": "C2"}, {"note": "D2"}, {"note": "E2"},
+        {"note": "E2"}, {"note": "D2"}, {"note": "C2"}, {"note": "B"}, {"note": "A"},
+        {"note": "A"}, {"note": "B"}, {"note": "C2"}, {"note": "B"}, {"note": "A"}
+      ]
+    },
+    {
+      "title": "How its Done",
+      "artist": "Huntrix",
+      "image": null,
+      "difficulty": "medium",
+      "notes": [
+        {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "A"},
+        {"note": "D2"}, {"note": "C2"}, {"note": "A"},
+        {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "A"},
+        {"note": "G"}, {"note": "G"}, {"note": "A"},
+        {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "A"},
+        {"note": "D2"}, {"note": "E2"}, {"note": "D2"}, {"note": "C2"},
+        {"note": "C2"}, {"note": "C2"}, {"note": "B"}, {"note": "A"}, {"note": "G"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}
+      ]
+    },
+    {
+      "title": "Dancing Queen",
+      "artist": "ABBA",
+      "image": "assets/image.Abba.webp",
+      "difficulty": "easy",
+      "notes": [
+        {"note": "E"}, {"note": "G"}, {"note": "A"}, {"note": "A"},
+        {"note": "A"}, {"note": "G"}, {"note": "A"}, {"note": "B"}, {"note": "C2"},
+        {"note": "C2"}, {"note": "B"}, {"note": "C2"}, {"note": "D2"}, {"note": "B"}, {"note": "A"}, {"note": "G"},
+        {"note": "G"}, {"note": "C2"}, {"note": "C2"}, {"note": "C2"}, {"note": "C2"}, {"note": "B"}, {"note": "A"}, {"note": "G"},
+        {"note": "G"}, {"note": "A"}, {"note": "G"},
+        {"note": "C2"}, {"note": "C2"}, {"note": "C2"}, {"note": "C2"}, {"note": "B"}, {"note": "A"}, {"note": "G"},
+        {"note": "G"}, {"note": "A"}, {"note": "G"},
+        {"note": "E2"}, {"note": "D2"}, {"note": "C2"}, {"note": "B"}, {"note": "C2"}, {"note": "A"}
+      ]
+    },
+    {
+      "title": "Boyfriend",
+      "artist": "Justin Bieber",
+      "image": null,
+      "difficulty": "medium",
+      "notes": [
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "G"}, {"note": "E"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "G"}, {"note": "E"},
+        {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "A"}, {"note": "C2"}, {"note": "B"}, {"note": "A"}, {"note": "G"},
+        {"note": "E"}, {"note": "G"}, {"note": "A"},
+        {"note": "E2"}, {"note": "E2"}, {"note": "D2"}, {"note": "C2"}, {"note": "A"},
+        {"note": "C2"}, {"note": "C2"}, {"note": "C2"}, {"note": "B"}, {"note": "G"}, {"note": "A"},
+        {"note": "E2"}, {"note": "E2"}, {"note": "D2"}, {"note": "C2"}, {"note": "A"},
+        {"note": "C2"}, {"note": "D2"}, {"note": "C2"}, {"note": "B"}, {"note": "A"}
+      ]
+    },
+    {
+      "title": "Blue (Da Be Dee)",
+      "artist": "Eiffel 65",
+      "image": null,
+      "difficulty": "medium",
+      "notes": [
+        {"note": "A"}, {"note": "C2"}, {"note": "E2"}, {"note": "A"}, {"note": "G"}, {"note": "B"}, {"note": "D2"}, {"note": "G"},
+        {"note": "A"}, {"note": "C2"}, {"note": "E2"}, {"note": "A"}, {"note": "G"}, {"note": "B"}, {"note": "D2"}, {"note": "G"},
+        {"note": "A"}, {"note": "C2"}, {"note": "E2"}, {"note": "D2"}, {"note": "C2"}, {"note": "B"}, {"note": "A"},
+        {"note": "A"}, {"note": "C2"}, {"note": "A"}, {"note": "G"}, {"note": "A"},
+        {"note": "A"}, {"note": "C2"}, {"note": "E2"}, {"note": "A"}, {"note": "G"}, {"note": "B"}, {"note": "D2"}, {"note": "G"},
+        {"note": "A"}, {"note": "C2"}, {"note": "D2"}, {"note": "B"}, {"note": "C2"}, {"note": "A"}
       ]
     }
   ]

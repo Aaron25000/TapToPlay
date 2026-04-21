@@ -1,6 +1,7 @@
-const express = require("express");
+import express from "express";
+import User from "../models/user.js";
+
 const router = express.Router();
-const User = require("../models/user");
 
 // GET all users
 router.get("/", async (req, res) => {
@@ -49,4 +50,4 @@ router.patch("/:id/completed", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

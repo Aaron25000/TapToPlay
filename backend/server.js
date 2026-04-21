@@ -1,17 +1,23 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-require('dotenv').config(); 
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+// Routes
+import songRoutes from "./routes/songs.js";
+import userRoutes from "./routes/users.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, './.env') });
 
 const app = express();
-
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Routes
-const songRoutes = require("./routes/songs");
-const userRoutes = require("./routes/users");
 
 app.use("/songs", songRoutes);
 app.use("/users", userRoutes);

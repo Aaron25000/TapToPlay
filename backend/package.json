@@ -1,6 +1,7 @@
 {
   "name": "taptoplayapp",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "songs.js",
   "scripts": {
