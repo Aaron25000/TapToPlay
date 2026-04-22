@@ -1,17 +1,15 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
+
 const Song = require('./models/song');
 const User = require('./models/user');
 
-const userData = require('./data/users.json')
-
-console.log(userData);
-
 const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('MongoDB connected!'))
-  .catch(err => console.error('MongoDB connection error:', err));
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI is missing in .env");
+  process.exit(1);
+}
 
 const seedSongs = [
   {
@@ -89,27 +87,29 @@ const seedSongs = [
 const seedUsers = [
   {
     username: 'TapToPlayTeam',
-    password: 'TapToPlay' // in production, hash passwords
+    pin: '1234'
   }
 ];
 
 async function seedDatabase() {
   try {
+    await mongoose.connect(MONGO_URI);
+    console.log('MongoDB connected!');
+
     await Song.deleteMany({});
     await User.deleteMany({});
 
     const insertedSongs = await Song.insertMany(seedSongs);
     console.log(`Seeded ${insertedSongs.length} songs`);
 
-    if (userData && userData.users) {
-      const insertedUsers = await User.insertMany(userData.users);
-      console.log(`Seeded ${insertedUsers.length} users`);
-    }
+    const insertedUsers = await User.insertMany(seedUsers);
+    console.log(`Seeded ${insertedUsers.length} users`);
 
-    mongoose.disconnect();
     console.log('Database seeding complete!');
   } catch (err) {
     console.error('Error seeding database:', err);
+  } finally {
+    await mongoose.disconnect();
   }
 }
 

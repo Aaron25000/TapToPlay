@@ -1,18 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
-// import './Login_page.css';  // If there is a CSS file
+import { loginUser } from '../../api/songs';
 
 function Login_page({ onLogin, onClose }) {
-  const [pin, setPin] = useState(['', '', '', '']); // 4-digit PIN code
+  const [pin, setPin] = useState(['', '', '', '']);
   const [error, setError] = useState('');
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
 
-  // Auto-focus on the first input box
   useEffect(() => {
     inputRefs[0].current.focus();
   }, []);
 
   const handleChange = (index, value) => {
-    // Only allow numeric input
     if (value && !/^\d+$/.test(value)) return;
 
     const newPin = [...pin];
@@ -20,45 +18,39 @@ function Login_page({ onLogin, onClose }) {
     setPin(newPin);
     setError('');
 
-    // Automatically move to the next input box
     if (value && index < 3) {
       inputRefs[index + 1].current.focus();
     }
   };
 
   const handleKeyDown = (index, e) => {
-    // Handle backspace: if current is empty, move to previous input
     if (e.key === 'Backspace' && !pin[index] && index > 0) {
       inputRefs[index - 1].current.focus();
     }
   };
 
-  // Handle number keypad clicks
   const handleNumberClick = (number) => {
-    // Find the first empty input box
     const emptyIndex = pin.findIndex(digit => digit === '');
     if (emptyIndex !== -1) {
       const newPin = [...pin];
       newPin[emptyIndex] = number.toString();
       setPin(newPin);
-      
-      // Automatically move to the next input box
+      setError('');
+
       if (emptyIndex < 3) {
         inputRefs[emptyIndex + 1].current.focus();
       }
     }
   };
 
-  // Handle backspace button
   const handleBackspace = () => {
-    // Find the last non-empty input box
     for (let i = 3; i >= 0; i--) {
       if (pin[i] !== '') {
         const newPin = [...pin];
         newPin[i] = '';
         setPin(newPin);
-        
-        // Focus on the current input box
+        setError('');
+
         if (i > 0) {
           inputRefs[i].current.focus();
         } else {
@@ -69,46 +61,49 @@ function Login_page({ onLogin, onClose }) {
     }
   };
 
-  // Handle clearing all input
   const handleClear = () => {
     setPin(['', '', '', '']);
+    setError('');
     inputRefs[0].current.focus();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const pinCode = pin.join('');
     if (pinCode.length !== 4) {
       setError('Please enter 4-digit PIN');
       return;
     }
 
-    onLogin({
-      username: 'User',
-      pin: pinCode
-    });
+    const user = await loginUser(pinCode);
+
+    if (!user) {
+      setError('Invalid PIN');
+      return;
+    }
+
+    onLogin(user);
   };
 
-  // Handle paste event
   const handlePaste = (e) => {
     e.preventDefault();
     const pastedData = e.clipboardData.getData('text');
     const digits = pastedData.replace(/\D/g, '').slice(0, 4);
-    
+
     if (digits) {
       const newPin = [...pin];
       for (let i = 0; i < digits.length; i++) {
         newPin[i] = digits[i];
       }
       setPin(newPin);
-      
+      setError('');
+
       const nextIndex = Math.min(digits.length, 3);
       inputRefs[nextIndex].current.focus();
     }
   };
 
-  // Number keypad button style
   const keypadButtonStyle = {
     width: '70px',
     height: '70px',
@@ -145,7 +140,7 @@ function Login_page({ onLogin, onClose }) {
         position: 'relative',
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
       }}>
-        <button 
+        <button
           onClick={onClose}
           style={{
             position: 'absolute',
@@ -168,13 +163,13 @@ function Login_page({ onLogin, onClose }) {
         >
           ✕
         </button>
-        
+
         <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-          <img 
-            src="/assets/TapToPlay_team_logo_design.png" 
-            alt="TapToPlay Logo" 
-            style={{ 
-              maxWidth: '150px', 
+          <img
+            src="/assets/TapToPlay_team_logo_design.png"
+            alt="TapToPlay Logo"
+            style={{
+              maxWidth: '150px',
               marginBottom: '15px',
               width: '100%',
               height: 'auto'
@@ -202,8 +197,7 @@ function Login_page({ onLogin, onClose }) {
               {error}
             </div>
           )}
-          
-          {/* PIN input boxes */}
+
           <div style={{
             display: 'flex',
             gap: '10px',
@@ -240,12 +234,11 @@ function Login_page({ onLogin, onClose }) {
                   e.target.style.borderColor = error ? '#ff4444' : '#e0e0e0';
                   e.target.style.boxShadow = 'none';
                 }}
-                readOnly // Make input read-only, only allow keypad input
+                readOnly
               />
             ))}
           </div>
 
-          {/* Number keypad */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
@@ -273,11 +266,9 @@ function Login_page({ onLogin, onClose }) {
                 {number}
               </button>
             ))}
-            
-            {/* Empty spacer */}
+
             <div></div>
-            
-            {/* 0 button */}
+
             <button
               type="button"
               onClick={() => handleNumberClick(0)}
@@ -295,8 +286,7 @@ function Login_page({ onLogin, onClose }) {
             >
               0
             </button>
-            
-            {/* Backspace button */}
+
             <button
               type="button"
               onClick={handleBackspace}
@@ -318,7 +308,6 @@ function Login_page({ onLogin, onClose }) {
             </button>
           </div>
 
-          {/* Action buttons */}
           <div style={{
             display: 'flex',
             gap: '10px',
@@ -348,7 +337,7 @@ function Login_page({ onLogin, onClose }) {
             >
               Clear
             </button>
-            
+
             <button
               type="submit"
               style={{

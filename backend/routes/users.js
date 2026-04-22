@@ -34,15 +34,42 @@ router.post("/", async (req, res) => {
   }
 });
 
+// POST login user with 4-digit pin
+router.post("/login", async (req, res) => {
+  try {
+    const { pin } = req.body;
+
+    if (!pin) {
+      return res.status(400).json({ error: "PIN is required" });
+    }
+
+    const user = await User.findOne({ pin }).populate("completedSongs");
+
+    if (!user) {
+      return res.status(401).json({ error: "Invalid PIN" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // PATCH update user progress (add completed song)
 router.patch("/:id/completed", async (req, res) => {
   try {
     const { songId } = req.body;
     const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
     if (!user.completedSongs.includes(songId)) {
       user.completedSongs.push(songId);
       await user.save();
     }
+
     res.json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });
