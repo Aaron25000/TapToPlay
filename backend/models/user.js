@@ -6,6 +6,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  pin: {
+    type: String,
+    required: true
+  },
   joinDate: {
     type: String
   },
