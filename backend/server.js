@@ -1,44 +1,50 @@
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
+// 1. Import Routes
+const achievementRoutes = require('./routes/achievements.js');
+const songRoutes = require('./routes/songs.js'); // Uncomment when ready
+const userRoutes = require('./routes/users.js'); // Uncomment when ready
+
 const app = express();
+const PORT = process.env.PORT || 5001;
 
-// Middleware
-app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001"]
-}));
-app.use(express.json());
+// 2. Middleware
+app.use(cors());
+app.use(express.json()); // Essential for parsing JSON bodies in POST requests
 
-// Routes
-const songRoutes = require("./routes/songs");
-const userRoutes = require("./routes/users");
+// 3. Routes Middleware
+app.use('/achievements', achievementRoutes);
+app.use('/songs', songRoutes);
+app.use('/users', userRoutes);
 
-app.use("/songs", songRoutes);
-app.use("/users", userRoutes);
-
-// Test route
+// 4. Base Route for Testing
 app.get('/', (req, res) => {
-  res.send('Backend server is running');
+    res.send('TapToPlay API is running...');
 });
 
-// MongoDB connection safety check
-if (!process.env.MONGO_URI) {
-  console.error("❌ MONGO_URI is missing in .env file");
-  process.exit(1);
-}
+// 5. Database Connection & Server Start
+const startServer = async () => {
+    try {
+        const MONGO_URI = process.env.MONGO_URI;
+        if (!MONGO_URI) {
+            throw new Error('MONGO_URI is missing from .env');
+        }
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected!'))
-  .catch(err => {
-    console.error('MongoDB connection error:', err);
-    process.exit(1);
-  });
+        console.log('⏳ Connecting to MongoDB...');
+        await mongoose.connect(MONGO_URI);
+        console.log('✅ MongoDB Connected');
 
-const PORT = process.env.PORT || 5000;
+        app.listen(PORT, () => {
+            console.log(`🚀 Server running on http://localhost:${PORT}`);
+        });
+    } catch (err) {
+        console.error('❌ Failed to start server:', err.message);
+        process.exit(1);
+    }
+};
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is live on the network!`);
-  console.log(`Local access: http://localhost:${PORT}`);
-});
+startServer();

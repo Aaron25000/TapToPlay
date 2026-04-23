@@ -1,0 +1,125 @@
+.loginOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: var(--blur-high);
+  -webkit-backdrop-filter: var(--blur-high);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background: linear-gradient(
+    145deg, 
+    #1a0b2e 0%,    /* Keeps the Topbar icons visible */
+    #7300ff 20%,   /* Deep Purple bridge */
+    #ff4500 50%,   /* Rich Orange-Red heart */
+    #ff8c00 75%,   /* Vibrant Orange */
+    #ffcc33 100%   /* Bright Amber Yellow at the bottom */
+  );
+  background-attachment: fixed;
+}
+
+.loginCard {
+  background: var(--glass-surface-thick);
+  backdrop-filter: var(--blur-high);
+  -webkit-backdrop-filter: var(--blur-high);
+  border: 1px solid var(--border-glass-base);
+  color: var(--text-primary);
+  
+  border-radius: 24px;
+  padding: 40px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.loginTitle {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 15px 0 5px 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.keypadGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 320px;
+  padding: 1rem;
+}
+
+.keypadBtn {
+  width: 70px;
+  height: 70px;
+  background-color: var(--glass-surface-high);
+  border: 1px solid var(--border-glass-thin);
+  border-radius: 50%;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.keypadBtn:hover {
+  transform: scale(1.1);
+  background: var(--glass-surface-high);
+  border-color: var(--border-glass-thick);
+  box-shadow: 0 0 15px var(--color-primary-glow); /* 增加发光感 */
+}
+
+.pinInput {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass-thin);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0;
+  letter-spacing: 1rem;
+  outline: none;
+}
+
+.pinInput::placeholder {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.loginSubmit {
+  margin-top: 20px;
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  background: var(--color-primary-glow, #7300ff);
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.loginSubmit:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Optional: Add a subtle pulse to the keypad buttons on click */
+.keypadBtn:active {
+  transform: scale(0.9);
+  background: var(--border-glass-thick);
+}

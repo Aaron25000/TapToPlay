@@ -42,7 +42,7 @@ const UserSchema = new mongoose.Schema({
   ],
   achievements: [
     {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Achievement"
     }
   ]

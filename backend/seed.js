@@ -1,116 +1,90 @@
 const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
-const Song = require('./models/song');
-const User = require('./models/user');
+/**
+ * Robust Seeder Tool
+ * Logs every phase to capture "silent" hangs
+ */
+class DatabaseSeeder {
+    constructor() {
+        this.uri = process.env.MONGO_URI;
+        this.dataDir = path.join(__dirname, 'data');
+        this.models = {
+            User: require('./models/user'),
+            Song: require('./models/song'),
+            Achievement: require('./models/achievement')
+        };
+    }
 
-const MONGO_URI = process.env.MONGO_URI;
+    log(step, message) {
+        console.log(`[${step.toUpperCase()}] ${message}`);
+    }
 
-if (!MONGO_URI) {
-  console.error("❌ MONGO_URI is missing in .env");
-  process.exit(1);
+    async init() {
+        this.log('init', 'Starting Seeder Engine...');
+        
+        if (!this.uri) {
+            console.error('❌ FATAL: MONGO_URI is missing from environment.');
+            process.exit(1);
+        }
+
+        try {
+            await this.connect();
+            const data = await this.loadFiles();
+            await this.clean();
+            await this.seed(data);
+            this.log('done', 'Seeding complete!');
+        } catch (error) {
+            console.error('\n💥 SEEDER CRASHED:');
+            console.error(error);
+        } finally {
+            await mongoose.disconnect();
+            this.log('exit', 'Database connection closed.');
+            process.exit(0);
+        }
+    }
+
+    async connect() {
+        this.log('db', 'Connecting to MongoDB Atlas...');
+        // Force a 5-second timeout to stop the "silent hang"
+        await mongoose.connect(this.uri, {
+            serverSelectionTimeoutMS: 5000,
+        });
+        this.log('db', 'Connected successfully.');
+    }
+
+    async loadFiles() {
+        this.log('fs', 'Loading JSON data from /data...');
+        const usersRaw = fs.readFileSync(path.join(this.dataDir, 'users.json'), 'utf-8');
+        const songsRaw = fs.readFileSync(path.join(this.dataDir, 'songs.json'), 'utf-8');
+        
+        return {
+            users: JSON.parse(usersRaw).users || JSON.parse(usersRaw),
+            songs: JSON.parse(songsRaw).songs || JSON.parse(songsRaw)
+        };
+    }
+
+    async clean() {
+        this.log('clean', 'Wiping existing collections...');
+        await Promise.all([
+            this.models.User.deleteMany({}),
+            this.models.Song.deleteMany({}),
+            this.models.Achievement.deleteMany({})
+        ]);
+        this.log('clean', 'Clear complete.');
+    }
+
+    async seed(data) {
+        this.log('seed', `Inserting ${data.users.length} users...`);
+        await this.models.User.insertMany(data.users);
+
+        this.log('seed', `Inserting ${data.songs.length} songs...`);
+        await this.models.Song.insertMany(data.songs);
+    }
 }
 
-const seedSongs = [
-  {
-    title: 'Dancing Queen',
-    artist: 'Abba',
-    image: '/assets/image/Abba.webp',
-    difficulty: 'easy',
-    notes: [{ note: 'A' }, { note: 'B' }, { note: 'C' }]
-  },
-  {
-    title: 'Treat You Better',
-    artist: 'Shawn Mendes',
-    image: '/assets/image/Shawn-Mendes.jpg',
-    difficulty: 'medium',
-    notes: [{ note: 'G' }, { note: 'A' }, { note: 'B' }]
-  },
-  {
-    title: 'Hey Jude',
-    artist: 'The Beatles',
-    image: '/assets/image/beatles.jpg',
-    difficulty: 'hard',
-    notes: [{ note: 'F' }, { note: 'G' }, { note: 'A' }]
-  },
-  {
-    title: 'Bohemian Rhapsody',
-    artist: 'Queen',
-    image: '/assets/image/Queen.jpg',
-    difficulty: 'medium',
-    notes: [{ note: 'Bb' }, { note: 'Ab' }, { note: 'G' }]
-  },
-  {
-    title: 'Perfect',
-    artist: 'Ed Sheeran',
-    image: '/assets/image/Ed_Sheeran.webp',
-    difficulty: 'easy',
-    notes: [{ note: 'G' }, { note: 'D' }, { note: 'E' }]
-  },
-  {
-    title: 'Closer',
-    artist: 'The Chainsmokers',
-    image: '/assets/image/The-Chainsmokers.webp',
-    difficulty: 'medium',
-    notes: [{ note: 'E' }, { note: 'F' }, { note: 'G' }]
-  },
-  {
-    title: 'Bad Day',
-    artist: 'Daniel Powter',
-    image: '/assets/image/david-powter-bad-day.webp',
-    difficulty: 'easy',
-    notes: [{ note: 'Eb' }, { note: 'F' }, { note: 'G' }]
-  },
-  {
-    title: 'Cold',
-    artist: 'Coldplay',
-    image: '/assets/image/coldplay-band-facts.jpg',
-    difficulty: 'medium',
-    notes: [{ note: 'C' }, { note: 'D' }, { note: 'E' }]
-  },
-  {
-    title: 'Levels',
-    artist: 'Avicii',
-    image: '/assets/image/Avicii.webp',
-    difficulty: 'hard',
-    notes: [{ note: 'C#' }, { note: 'B' }, { note: 'A' }]
-  },
-  {
-    title: 'Theme from Jurassic Park',
-    artist: 'John Williams',
-    image: '/assets/image/john-williams.jpeg',
-    difficulty: 'easy',
-    notes: [{ note: 'Bb' }, { note: 'A' }, { note: 'Bb' }]
-  }
-];
-
-const seedUsers = [
-  {
-    username: 'TapToPlayTeam',
-    pin: '1234'
-  }
-];
-
-async function seedDatabase() {
-  try {
-    await mongoose.connect(MONGO_URI);
-    console.log('MongoDB connected!');
-
-    await Song.deleteMany({});
-    await User.deleteMany({});
-
-    const insertedSongs = await Song.insertMany(seedSongs);
-    console.log(`Seeded ${insertedSongs.length} songs`);
-
-    const insertedUsers = await User.insertMany(seedUsers);
-    console.log(`Seeded ${insertedUsers.length} users`);
-
-    console.log('Database seeding complete!');
-  } catch (err) {
-    console.error('Error seeding database:', err);
-  } finally {
-    await mongoose.disconnect();
-  }
-}
-
-seedDatabase();
+// Start the engine
+const seeder = new DatabaseSeeder();
+seeder.init();

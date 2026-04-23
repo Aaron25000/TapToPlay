@@ -26,17 +26,6 @@ const Topbar = ({ children, onUserProfile, onAchievements, onLoginClick}) => {
       <div className={styles.middleSection}>
         {children}
       </div>
-
-      <div className={styles.rightSection}>
-        {/* Login Button */}
-        <button 
-          className={styles.loginButton} 
-          onClick={onLoginClick}
-        >
-          Login
-        </button>
-      </div>
-      
       <div className={styles.rightSection}>
         {/* User Profile Button */}
         <button className={styles.iconButton} onClick={onUserProfile} aria-label="User Profile">

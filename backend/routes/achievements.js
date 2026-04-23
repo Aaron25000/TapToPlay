@@ -1,8 +1,7 @@
 const express = require("express");
-const router = express.Router();
 const Achievement = require("../models/achievement");
 
-
+const router = express.Router();
 // GET all achievements
 router.get("/", async (req, res) => {
   try {
@@ -23,24 +22,5 @@ router.post("/", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;

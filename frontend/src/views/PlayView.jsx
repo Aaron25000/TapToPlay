@@ -52,7 +52,6 @@ const PlayView = () => {
   // Guard against invalid instrument in URL
   const SelectedInstrument = INSTRUMENT_COMPONENTS[instrumentId?.toLowerCase()] || Piano;
 
-  // Fixed typo: .length
   const totalNotes = song?.notes?.length || 0; 
   const isFinished = totalNotes > 0 && currentIndex >= totalNotes;
   const correctNotes = attemptHistory.filter(status => status === 'green').length;
