@@ -30,10 +30,18 @@ app.get('/', (req, res) => {
   res.send('Backend server is running');
 });
 
-// Connect to MongoDB
+// MongoDB connection safety check
+if (!process.env.MONGO_URI) {
+  console.error("❌ MONGO_URI is missing in .env file");
+  process.exit(1);
+}
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected!'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  });
 
 const PORT = process.env.PORT || 5000;
 

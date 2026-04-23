@@ -1,55 +1,66 @@
-import mongoose from 'mongoose';
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
+const path = require('path');
+const fs = require('fs');
+const mongoose = require('mongoose');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
+// 1. HEARTBEAT - If you don't see this, Node isn't reading the file
+console.log('>>> [SYSTEM] Script initiated...');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-dotenv.config({ path: path.join(__dirname, './.env') });
-
-
-import Song from './models/song.js';
-import User from './models/user.js';
-
-
-const userData = JSON.parse(fs.readFileSync(path.join(__dirname, './data/users.json'), 'utf8'));
-const songData = JSON.parse(fs.readFileSync(path.join(__dirname, './data/songs.json'), 'utf8'));
+// 2. IMPORT MODELS
+const User = require('./models/user.js');
+const Song = require('./models/song.js');
+const Achievement = require('./models/achievement.js');
 
 const MONGO_URI = process.env.MONGO_URI;
 
-
 async function seedDatabase() {
+    console.log('--- 🚀 Starting Seed Process ---');
+
     try {
-        console.log('--- STEP 1: Attempting Connection ---');
-        await mongoose.connect(MONGO_URI);
-        console.log('✅ MongoDB connected successfully!');
+        if (!MONGO_URI) {
+            throw new Error('MONGO_URI is missing from .env file');
+        }
 
-        console.log('--- STEP 2: Clearing Collections ---');
+        // --- STEP 1: Connect ---
+        console.log('--- ⏳ Connecting to MongoDB ---');
+        await mongoose.connect(MONGO_URI, {
+            serverSelectionTimeoutMS: 5000
+        });
+        console.log('✅ Connected successfully!');
+
+        // --- STEP 2: Load and Parse Data ---
+        const usersPath = path.join(__dirname, 'data', 'users.json');
+        const songsPath = path.join(__dirname, 'data', 'songs.json');
+
+        console.log('--- ⏳ Reading Data Files ---');
+        const userData = JSON.parse(fs.readFileSync(usersPath, 'utf8'));
+        const songData = JSON.parse(fs.readFileSync(songsPath, 'utf8'));
+
+        const usersToSeed = userData.users || userData;
+        const songsToSeed = songData.songs || songData;
+
+        // --- STEP 3: Clear and Seed ---
+        console.log('--- ⏳ Wiping Collections ---');
         await Promise.all([
+            User.deleteMany({}),
             Song.deleteMany({}),
-            User.deleteMany({})
+            Achievement.deleteMany({})
         ]);
-        console.log('✅ Collections cleared');
 
-        console.log('--- STEP 3: Seeding ---');
-        if (userData?.users) {
-            await User.insertMany(userData.users);
-            console.log(`✅ Seeded ${userData.users.length} users`);
-        }
+        console.log('--- ⏳ Inserting Records ---');
+        await User.insertMany(usersToSeed);
+        console.log(`✅ Seeded ${usersToSeed.length} users`);
 
-        if (songData?.songs) {
-            await Song.insertMany(songData.songs);
-            console.log(`✅ Seeded ${songData.songs.length} songs`);
-        }
+        await Song.insertMany(songsToSeed);
+        console.log(`✅ Seeded ${songsToSeed.length} songs`);
 
     } catch (err) {
-        console.error('❌ FATAL ERROR:', err.message);
+        console.error('\n❌ FATAL ERROR:');
+        console.error(err.message);
+        console.error(err.stack);
     } finally {
         await mongoose.disconnect();
-        console.log('--- Finished ---');
+        console.log('--- 🏁 Finished ---');
         process.exit(0);
     }
 }
