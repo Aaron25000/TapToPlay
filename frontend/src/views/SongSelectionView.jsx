@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Topbar from "../components/ui/Topbar";
 import SearchBar from "../components/ui/SearchBar";
 import MusicCard from "../components/ui/MusicCard";
-import Login_page from "../components/dialog/login";
 import UserProfileDialog from "../components/dialog/UserProfileDialog";
 import AchievementsDialog from "../components/dialog/AchievementsDialog";
 import SelectInstrumentDialog from "../components/dialog/SelectInstrumentDialog";
@@ -22,7 +21,7 @@ const SongSelectionView = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [difficulty, setDifficulty] = useState("");
 
-  const [showLogin, setShowLogin] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
   const [showProfile, setShowProfile] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
   const [showSelectInstrument, setShowSelectInstrument] = useState(false);
@@ -99,13 +98,6 @@ const SongSelectionView = () => {
           ))}
         </div>
       </main>
-
-      {showLogin && (
-        <Login_page
-          onLogin={handleLoginSuccess}
-          onClose={() => setShowLogin(false)}
-        />
-      )}
 
       {showProfile && (
         <UserProfileDialog user={user} onClose={closeProfile} />

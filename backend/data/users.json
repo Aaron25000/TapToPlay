@@ -2,6 +2,7 @@
   "users": [
     {
       "username": "Test User",
+      "pin": "1234",
       "joinDate": "April 2026",
       "currentStreak": 0,
       "longestStreak": 0,

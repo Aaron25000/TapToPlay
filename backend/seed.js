@@ -1,68 +1,90 @@
-const path = require('path');
-const fs = require('fs');
 const mongoose = require('mongoose');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+const fs = require('fs');
+const path = require('path');
+require('dotenv').config();
 
-// 1. HEARTBEAT - If you don't see this, Node isn't reading the file
-console.log('>>> [SYSTEM] Script initiated...');
+/**
+ * Robust Seeder Tool
+ * Logs every phase to capture "silent" hangs
+ */
+class DatabaseSeeder {
+    constructor() {
+        this.uri = process.env.MONGO_URI;
+        this.dataDir = path.join(__dirname, 'data');
+        this.models = {
+            User: require('./models/user'),
+            Song: require('./models/song'),
+            Achievement: require('./models/achievement')
+        };
+    }
 
-// 2. IMPORT MODELS
-const User = require('./models/user.js');
-const Song = require('./models/song.js');
-const Achievement = require('./models/achievement.js');
+    log(step, message) {
+        console.log(`[${step.toUpperCase()}] ${message}`);
+    }
 
-const MONGO_URI = process.env.MONGO_URI;
-
-async function seedDatabase() {
-    console.log('--- 🚀 Starting Seed Process ---');
-
-    try {
-        if (!MONGO_URI) {
-            throw new Error('MONGO_URI is missing from .env file');
+    async init() {
+        this.log('init', 'Starting Seeder Engine...');
+        
+        if (!this.uri) {
+            console.error('❌ FATAL: MONGO_URI is missing from environment.');
+            process.exit(1);
         }
 
-        // --- STEP 1: Connect ---
-        console.log('--- ⏳ Connecting to MongoDB ---');
-        await mongoose.connect(MONGO_URI, {
-            serverSelectionTimeoutMS: 5000
+        try {
+            await this.connect();
+            const data = await this.loadFiles();
+            await this.clean();
+            await this.seed(data);
+            this.log('done', 'Seeding complete!');
+        } catch (error) {
+            console.error('\n💥 SEEDER CRASHED:');
+            console.error(error);
+        } finally {
+            await mongoose.disconnect();
+            this.log('exit', 'Database connection closed.');
+            process.exit(0);
+        }
+    }
+
+    async connect() {
+        this.log('db', 'Connecting to MongoDB Atlas...');
+        // Force a 5-second timeout to stop the "silent hang"
+        await mongoose.connect(this.uri, {
+            serverSelectionTimeoutMS: 5000,
         });
-        console.log('✅ Connected successfully!');
+        this.log('db', 'Connected successfully.');
+    }
 
-        // --- STEP 2: Load and Parse Data ---
-        const usersPath = path.join(__dirname, 'data', 'users.json');
-        const songsPath = path.join(__dirname, 'data', 'songs.json');
+    async loadFiles() {
+        this.log('fs', 'Loading JSON data from /data...');
+        const usersRaw = fs.readFileSync(path.join(this.dataDir, 'users.json'), 'utf-8');
+        const songsRaw = fs.readFileSync(path.join(this.dataDir, 'songs.json'), 'utf-8');
+        
+        return {
+            users: JSON.parse(usersRaw).users || JSON.parse(usersRaw),
+            songs: JSON.parse(songsRaw).songs || JSON.parse(songsRaw)
+        };
+    }
 
-        console.log('--- ⏳ Reading Data Files ---');
-        const userData = JSON.parse(fs.readFileSync(usersPath, 'utf8'));
-        const songData = JSON.parse(fs.readFileSync(songsPath, 'utf8'));
-
-        const usersToSeed = userData.users || userData;
-        const songsToSeed = songData.songs || songData;
-
-        // --- STEP 3: Clear and Seed ---
-        console.log('--- ⏳ Wiping Collections ---');
+    async clean() {
+        this.log('clean', 'Wiping existing collections...');
         await Promise.all([
-            User.deleteMany({}),
-            Song.deleteMany({}),
-            Achievement.deleteMany({})
+            this.models.User.deleteMany({}),
+            this.models.Song.deleteMany({}),
+            this.models.Achievement.deleteMany({})
         ]);
+        this.log('clean', 'Clear complete.');
+    }
 
-        console.log('--- ⏳ Inserting Records ---');
-        await User.insertMany(usersToSeed);
-        console.log(`✅ Seeded ${usersToSeed.length} users`);
+    async seed(data) {
+        this.log('seed', `Inserting ${data.users.length} users...`);
+        await this.models.User.insertMany(data.users);
 
-        await Song.insertMany(songsToSeed);
-        console.log(`✅ Seeded ${songsToSeed.length} songs`);
-
-    } catch (err) {
-        console.error('\n❌ FATAL ERROR:');
-        console.error(err.message);
-        console.error(err.stack);
-    } finally {
-        await mongoose.disconnect();
-        console.log('--- 🏁 Finished ---');
-        process.exit(0);
+        this.log('seed', `Inserting ${data.songs.length} songs...`);
+        await this.models.Song.insertMany(data.songs);
     }
 }
 
-seedDatabase();
+// Start the engine
+const seeder = new DatabaseSeeder();
+seeder.init();

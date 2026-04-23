@@ -1,5 +1,5 @@
-import express from "express";
-import Achievement from "../models/achievement";
+const express = require("express");
+const Achievement = require("../models/achievement");
 
 const router = express.Router();
 // GET all achievements
@@ -23,4 +23,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

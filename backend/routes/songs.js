@@ -1,5 +1,5 @@
-import express from "express";
-import Song from "../models/song.js";
+const express = require("express");
+const Song = require("../models/song.js");
 
 const router = express.Router();
 
@@ -57,4 +57,4 @@ router.get("/:id", async (req, res) => {
 });
 
 
-export default router;
+module.exports = router;
