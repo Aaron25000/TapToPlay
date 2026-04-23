@@ -6,7 +6,9 @@ const router = express.Router();
 // GET all users
 router.get("/", async (req, res) => {
   try {
-    const users = await User.find().populate("completedSongs");
+    const users = await User.find()
+      .populate("completedSongs")
+      .populate("achievements");
     res.json(users);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -17,7 +19,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const userId = req.params.id;
-    const user = await User.findById(userId).populate("completedSongs");
+    const user = await User.findById(userId)
+      .populate("completedSongs")
+      .populate("achievements");
     res.json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });

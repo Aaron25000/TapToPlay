@@ -89,3 +89,24 @@
   background-color: rgba(0, 0, 0, 0.1); 
   transform: scale(0.92);
 }
+
+.loginButton {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  margin-right: 10px; 
+}
+
+.loginButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.loginButton:active {
+  background-color: rgba(255, 255, 255, 0.25);
+}

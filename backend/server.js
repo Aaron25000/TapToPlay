@@ -8,6 +8,8 @@ import path from 'path';
 // Routes
 import songRoutes from "./routes/songs.js";
 import userRoutes from "./routes/users.js";
+import achievementRoutes from "./routes/achievements.js"
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,6 +23,7 @@ app.use(express.json());
 
 app.use("/songs", songRoutes);
 app.use("/users", userRoutes);
+app.use("/achievements", achievementRoutes);
 
 // Test route
 app.get('/', (req, res) => {

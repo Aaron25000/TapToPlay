@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Topbar from "../components/ui/Topbar";
 import SearchBar from "../components/ui/SearchBar";
 import MusicCard from "../components/ui/MusicCard";
+import Login_page from "../components/dialog/login";
 import UserProfileDialog from "../components/dialog/UserProfileDialog";
 import AchievementsDialog from '../components/dialog/AchievementsDialog';
 import { fetchSongs, fetchUsers } from "../api/songs"
@@ -14,6 +15,7 @@ const SongSelectionView = () => {
   const [user, setUser] = useState();
   const [songs, setSongs] = useState([]);
 
+  const [showLogin, setShowLogin] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
   const [showSelectInstrument, setShowSelectInstrument] = useState(false);
@@ -31,6 +33,10 @@ const SongSelectionView = () => {
   }, [])
 
 
+  const handleLoginSuccess = (loginData) => {
+    console.log("Login User:", loginData.username);
+    setShowLogin(false);
+  };
   const openProfile = () => setShowProfile(true);
   const closeProfile = () => setShowProfile(false);
 
@@ -49,6 +55,7 @@ const SongSelectionView = () => {
   return (
     <div className={styles.mainWrapper}>
       <Topbar
+        onLoginClick={() => setShowLogin(true)}
         onUserProfile={openProfile}
         onAchievements={() => setShowAchievements(true)}
       >
@@ -68,6 +75,9 @@ const SongSelectionView = () => {
         </div>
       </main>
 
+      {showLogin && (
+        <Login_page onLogin={handleLoginSuccess} onClose={() => setShowLogin(false)} />
+      )}
       {showProfile && (
         <UserProfileDialog user={user} onClose={closeProfile} />
       )}

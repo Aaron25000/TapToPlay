@@ -38,11 +38,12 @@ const UserSchema = new mongoose.Schema({
   ],
   achievements: [
     {
-      type: String
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Achievement"
     }
   ]
 });
 
-const Song = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
-export default Song;
+export default User;
